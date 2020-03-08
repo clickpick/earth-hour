@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import api from '../middleware/api';
-import rootReducer, { AppState } from '../reducers';
+import rootReducer, { AppState, userInitialState } from '../reducers';
 
-export const initialStore: AppState = {};
+export const initialStore: AppState = {
+    user: userInitialState,
+};
 
 export default (preloadedState = initialStore) => createStore(
     rootReducer,
