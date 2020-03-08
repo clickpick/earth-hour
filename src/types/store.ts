@@ -2,7 +2,14 @@ export enum ActionTypes {
     USER_AUTH_REQUEST = 'USER_AUTH_REQUEST',
     USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS',
     USER_AUTH_FAILURE = 'USER_AUTH_FAILURE',
+
+    VOTE_REQUEST = 'VOTE_REQUEST',
+    VOTE_SUCCESS = 'VOTE_SUCCESS',
+    VOTE_FAILURE = 'VOTE_FAILURE',
 }
+
+interface EntitiesObject<T> { [index: string]: T }
+type IdsArray = Array<number>;
 
 export type Error = string | null;
 
@@ -33,6 +40,29 @@ export interface UserState extends DataState {
     readonly data: User | null
 }
 
+/* Vote */
+export interface Answer {
+    readonly id: number,
+    readonly answer: string,
+    readonly comment: string | null,
+    readonly isRight: boolean
+}
+
+export interface Question {
+    readonly id: number,
+    readonly question: string,
+    readonly answers: Array<Answer>
+}
+
+export type Questions = EntitiesObject<Question>;
+export type QuestionIds = IdsArray | null;
+
+export interface VoteState extends DataState {
+    readonly questionIds: QuestionIds,
+    readonly questions: Questions,
+    readonly nextQuestionId: number
+}
+
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /**
@@ -51,5 +81,31 @@ export interface UserAuthSuccess {
 
 export interface UserAuthFailure {
     type: ActionTypes.USER_AUTH_FAILURE,
+    error: string
+}
+
+/* Vote */
+export interface VoteLoad {
+    type: ActionTypes.VOTE_REQUEST
+}
+
+export interface VoteSuccess {
+    type: ActionTypes.VOTE_SUCCESS,
+    payload: {
+        entities: {
+            question: Questions,
+            votes: {
+                [index: string]: {
+                    id: string,
+                    questions: QuestionIds
+                }
+            }
+        },
+        result: number
+    }
+}
+
+export interface VoteFailure {
+    type: ActionTypes.VOTE_FAILURE,
     error: string
 }
