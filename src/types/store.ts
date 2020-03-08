@@ -25,10 +25,6 @@ export interface Action {
 /* User */
 export interface User {
     readonly vkUserId: number,
-    readonly firstName: string,
-    readonly lastName: string,
-    readonly avatar200: string | null,
-    readonly utcOffset: number,
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean
 }
