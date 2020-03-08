@@ -1,0 +1,7 @@
+.Caption {
+    font-size: 12px; /* fallback */
+    font-size: var(--font-size-12);
+    font-weight: 400; /* fallback */
+    font-weight: var(--font-weight-regular);
+    line-height: 16px;
+}
