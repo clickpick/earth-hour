@@ -1,0 +1,7 @@
+.Headline {
+    font-size: 30px; /* fallback */
+    font-size: var(--font-size-30);
+    font-weight: 500; /* fallback */
+    font-weight: var(--font-weight-medium);
+    line-height: 36px;
+}
