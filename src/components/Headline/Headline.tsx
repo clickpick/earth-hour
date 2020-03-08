@@ -10,7 +10,7 @@ export interface HeadlineProps extends HTMLAttributes<HTMLHeadingElement>, HasCh
 const Headline: FC<HeadlineProps> = ({ className, level = 1, children, ...restProps }: HeadlineProps) =>
     createElement(
         `h${level}`,
-        { className: cn(className, 'Headline', 'padding-blue--rl'), ...restProps },
+        { className: cn(className, 'Headline'), ...restProps },
         children
     );
 
