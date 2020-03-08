@@ -3,7 +3,10 @@ import 'core-js/features/set';
 
 import React from 'react';
 import { render } from 'react-dom';
-import './index.css';
-import App from './App';
 
-render(<App />, document.getElementById('root'));
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
+
+const store = configureStore();
+
+render(<Root store={store} />, document.getElementById('root'));
