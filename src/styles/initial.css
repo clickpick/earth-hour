@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+div#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--font-common);
+}
+
+body {
+    overflow-x: hidden;
+}
+
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+}
+
+#root {
+    user-select: none;
+}
+
+a:focus {
+    outline: none;
+}
