@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.color-opacity--secondary {
+    opacity: 0.6;
+}
+
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Paddings */
