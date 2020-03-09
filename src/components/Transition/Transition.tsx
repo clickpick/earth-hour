@@ -1,4 +1,4 @@
-import { FC, useState, useCallback, useEffect, cloneElement, memo } from 'react';
+import React, { FC, useState, useCallback, useEffect, cloneElement, memo } from 'react';
 import cn from 'classnames';
 
 import { HasChildren } from '../../types/props';
@@ -41,7 +41,7 @@ const Transition: FC<TransitionProps> = ({ in: inProp, mounted, timeout, childre
         return null;
     }
 
-    return contentView(children);
+    return <>{React.Children.map(children, contentView)}</>;
 };
 
 Transition.defaultProps = {
