@@ -1,0 +1,48 @@
+.Button {
+    position: relative;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+
+    font-size: 14px; /* fallback */
+    font-size: var(--font-size-14);
+    font-weight: 500; /* fallback */
+    font-weight: var(--font-weight-medium);
+    line-height: 20px;
+
+    cursor: pointer;
+}
+
+.Button--circle {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.Button__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Button__icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.Button__icon svg {
+    width: 20px;
+    height: 20px;
+
+    fill: #FFF;
+}

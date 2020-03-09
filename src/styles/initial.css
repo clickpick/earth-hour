@@ -18,6 +18,8 @@ div#root {
 
 body {
     overflow-x: hidden;
+    background-color: #000;
+    color: #fff;
 }
 
 input,

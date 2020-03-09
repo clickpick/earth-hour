@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.D\(ib\) {
+    display: inline-block;
+}
+
 .color-opacity--secondary {
     opacity: 0.6;
 }
@@ -112,6 +116,10 @@
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Margins */
+.margin-tomato--top {
+    margin-top: 4px;
+}
+
 .margin-aqua--top {
     margin-top: 8px;
 }
