@@ -1,5 +1,5 @@
 import React, {
-    FC, HTMLAttributes, SyntheticEvent,
+    FC, HTMLAttributes,
     useMemo, useCallback,
     memo
 } from 'react';
@@ -8,15 +8,16 @@ import cn from 'classnames';
 import Headline from '../Headline';
 import Caption from '../Caption';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends HTMLAttributes<HTMLElement> {
     size?: 'medium' | 'large',
     title: string,
     hint?: string,
     poster?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    href?: string
 }
 
-const Card: FC<CardProps> = ({ className, size, poster, title, hint, disabled, style, onClick, ...restProps }: CardProps) => {
+const Card: FC<CardProps> = ({ className, href, size, poster, title, hint, disabled, style, onClick, ...restProps }: CardProps) => {
     const classNames = useMemo(() =>
         cn(className, 'Card', `Card--${size}`, 'Bs(bb)', 'Bs(bb)--all', {
             'Card--disabled': disabled
@@ -33,7 +34,7 @@ const Card: FC<CardProps> = ({ className, size, poster, title, hint, disabled, s
         [poster, size]);
 
     const hintView = useMemo(() => (!!hint) &&
-        <Caption className="D(ib) margin-tomato--top" children={hint} />,
+        <Caption className="D(ib) margin-tomato--top color-opacity--secondary" children={hint} />,
         [hint]);
 
     const contentView = useMemo(() =>
@@ -55,6 +56,15 @@ const Card: FC<CardProps> = ({ className, size, poster, title, hint, disabled, s
             onClick(e);
         }
     }, [disabled, onClick]);
+
+    if (href) {
+        return (
+            <a href={href} target="_blank" rel="noopener noreferrer" className={classNames} style={styles} {...restProps}>
+                {posterView}
+                {contentView}
+            </a>
+        );
+    }
 
     return (
         <div className={classNames} style={styles} onClick={handleClick} {...restProps}>

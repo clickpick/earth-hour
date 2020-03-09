@@ -4,6 +4,12 @@
     cursor: pointer;
 }
 
+a.Card {
+    display: block;
+    text-decoration: none;
+    color: #FFF;
+}
+
 .Card--large {
     position: relative;
 
