@@ -5,19 +5,20 @@ import React, {
 } from 'react';
 import cn from 'classnames';
 
+import { HasChildren } from '../../types/props';
+
 import Headline from '../Headline';
 import Caption from '../Caption';
 
-export interface CardProps extends HTMLAttributes<HTMLElement> {
+export interface CardProps extends HTMLAttributes<HTMLElement>, HasChildren {
     size?: 'medium' | 'large',
-    title: string,
     hint?: string,
     poster?: string,
     disabled?: boolean,
     href?: string
 }
 
-const Card: FC<CardProps> = ({ className, href, size, poster, title, hint, disabled, style, onClick, ...restProps }: CardProps) => {
+const Card: FC<CardProps> = ({ className, href, size, poster, children, hint, disabled, style, onClick, ...restProps }: CardProps) => {
     const classNames = useMemo(() =>
         cn(className, 'Card', `Card--${size}`, 'Bs(bb)', 'Bs(bb)--all', {
             'Card--disabled': disabled
@@ -42,10 +43,10 @@ const Card: FC<CardProps> = ({ className, href, size, poster, title, hint, disab
             'padding-blue': size === 'large',
             'color-opacity--secondary': disabled
         })}>
-            <Headline children={title} />
+            <Headline children={children} />
             {hintView}
         </div>,
-        [size, disabled, title, hintView]);
+        [size, disabled, children, hintView]);
 
     const handleClick = useCallback((e) => {
         if (disabled) {
