@@ -10,6 +10,7 @@
 @import '../../node_modules/@vkontakte/vkui/src//components/PanelHeaderButton/PanelHeaderButton.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/FixedLayout/FixedLayout.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/Separator/Separator.css';
+@import '../../node_modules/@vkontakte/vkui/src/components/HorizontalScroll/HorizontalScroll.css';
 
 @import './constants.css';
 @import './initial.css';
