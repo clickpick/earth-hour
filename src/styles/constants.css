@@ -10,4 +10,10 @@
 
     --background_content: #000;
     --header_background: #000;
+
+    --gradient-red-orange: linear-gradient(225deg, #F2994A 0%, #EB5757 100%);
+    --gradient-orange-yellow: linear-gradient(225deg, #FFD600 0%, #FF7800 100%);
+    --gradient-green-yellow: linear-gradient(225deg, #27AE60 0%, #FBE200 100%);
+    --gradient-blue-green: linear-gradient(225deg, #4EA7EF 0%, #90CA5C 100%);
+    --gradient-purple-aqua: linear-gradient(225deg, #7E84FF 0%, #82C9BC 100%);
 }
