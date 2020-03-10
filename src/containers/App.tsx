@@ -4,7 +4,7 @@ import '../styles/style.css';
 
 import useVote from '../hooks/use-vote';
 
-import { Root } from '@vkontakte/vkui';
+import { ConfigProvider, Root } from '@vkontakte/vkui';
 import Home from '../views/Home';
 
 const App: FC = () => {
@@ -13,9 +13,11 @@ const App: FC = () => {
     useEffect(() => { getQuestions(); }, [getQuestions]);
 
     return (
-        <Root activeView="home">
-            <Home id="home" />
-        </Root>
+        <ConfigProvider isWebView={true}>
+            <Root activeView="home">
+                <Home id="home" />
+            </Root>
+        </ConfigProvider>
     );
 };
 
