@@ -1,7 +1,8 @@
-@import '../components/Card/Card.css';
-
 @import '../components/Headline/Headline.css';
 @import '../components/Footnote/Footnote.css';
 @import '../components/Caption/Caption.css';
+@import '../components/Group/Group.css';
+
+@import '../components/Card/Card.css';
 
 @import '../components/Button/Button.css';

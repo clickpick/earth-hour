@@ -1,0 +1,11 @@
+.Group {
+    display: flex;
+}
+
+.Group--vertical {
+    flex-direction: column;
+}
+
+.Group--center {
+    align-items: center;
+}
