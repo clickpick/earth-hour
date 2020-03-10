@@ -16,6 +16,11 @@
     cursor: pointer;
 }
 
+a.Button {
+    text-decoration: none;
+    text-align: center;
+}
+
 .Button--circle {
     background-color: transparent;
     color: rgba(255, 255, 255, 0.3);
