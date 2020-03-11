@@ -41,6 +41,8 @@ function questions(state = initialQuesitions, action: VoteReducerActions): Quest
 
 function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number {
     switch (action.type) {
+        case ActionTypes.VOTE_SUCCESS:
+            return action.payload.entities.votes[action.payload.result].questions[0];
         default:
             return state;
     }
