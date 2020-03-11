@@ -44,13 +44,14 @@ export interface UserState extends DataState {
 export interface Answer {
     readonly id: number,
     readonly answer: string,
-    readonly comment: string | null,
     readonly isRight: boolean
 }
 
 export interface Question {
     readonly id: number,
     readonly question: string,
+    readonly comment: string | null,
+    readonly storyLink: string,
     readonly answers: Array<Answer>
 }
 
