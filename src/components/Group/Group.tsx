@@ -5,14 +5,16 @@ import { HasChildren } from '../../types/props';
 
 export interface GroupProps extends HTMLAttributes<HTMLDivElement>, HasChildren {
     vertical?: boolean,
-    center?: boolean
+    center?: boolean,
+    start?: boolean,
 }
 
-const Group: FC<GroupProps> = ({ className, vertical, center, ...restProps }: GroupProps) => {
+const Group: FC<GroupProps> = ({ className, vertical, center, start, ...restProps }: GroupProps) => {
     const classNames = useMemo(() => cn(className, 'Group', {
         'Group--vertical': vertical,
-        'Group--center': center
-    }), [className, vertical, center]);
+        'Group--center': center,
+        'Group--start': start
+    }), [className, vertical, center, start]);
 
     return <div className={classNames} {...restProps} />;
 };

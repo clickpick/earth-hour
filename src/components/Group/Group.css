@@ -9,3 +9,7 @@
 .Group--center {
     align-items: center;
 }
+
+.Group--start {
+    align-items: flex-start;
+}
