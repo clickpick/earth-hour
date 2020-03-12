@@ -12,6 +12,7 @@
     "deploy": "rm -rf build/ && npm run build && vk-miniapps-deploy"
   },
   "dependencies": {
+    "@types/react-linkify": "^1.0.0",
     "@vkontakte/icons": "^1.17.1",
     "@vkontakte/vk-bridge": "^2.0.8",
     "@vkontakte/vkui": "^3.4.2",
@@ -22,6 +23,7 @@
     "normalizr": "^3.6.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-linkify": "^1.0.0-alpha",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
