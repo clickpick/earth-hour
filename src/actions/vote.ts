@@ -12,19 +12,14 @@ export const fetchQuetions = () => ({
 });
 
 export const setNextQuestionId = () => (dispath: any, getState: any) => {
-    const { vote: { questionIds, nextQuestionId: currentQuestionId } } = getState();
+    const { vote: { questionIds, answers } } = getState();
 
     if (!questionIds) {
         throw new Error('questionIds is null');
     }
-    
-    const indexCurrentQuestionId: number = questionIds.indexOf(currentQuestionId);
 
-    if (indexCurrentQuestionId === -1) {
-        throw new Error('index current question id not found');
-    }
 
-    const nextQuestionId: number = questionIds[indexCurrentQuestionId + 1];
+    const nextQuestionId: number = questionIds[answers.length];
 
     if (!!nextQuestionId) {
         dispath({
@@ -33,3 +28,9 @@ export const setNextQuestionId = () => (dispath: any, getState: any) => {
         });
     }
 };
+
+export const attachAnswer = (questionId: number, answerId: number) => ({
+    type: ActionTypes.ATTACH_ANSWER,
+    questionId,
+    answerId
+});

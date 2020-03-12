@@ -7,7 +7,8 @@ export enum ActionTypes {
     VOTE_SUCCESS = 'VOTE_SUCCESS',
     VOTE_FAILURE = 'VOTE_FAILURE',
 
-    SET_NEXT_QUESTION_ID = 'SET_NEXT_QUESTION_ID'
+    SET_NEXT_QUESTION_ID = 'SET_NEXT_QUESTION_ID',
+    ATTACH_ANSWER = 'ATTACH_ANSWER'
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -60,10 +61,16 @@ export interface Question {
 export type Questions = EntitiesObject<Question>;
 export type QuestionIds = IdsArray | null;
 
+export interface UserAnswer {
+    readonly questionId: number,
+    readonly answerId: number
+}
+
 export interface VoteState extends DataState {
     readonly questionIds: QuestionIds,
     readonly questions: Questions,
-    readonly nextQuestionId: number
+    readonly nextQuestionId: number,
+    readonly answers: Array<UserAnswer>
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -116,4 +123,10 @@ export interface VoteFailure {
 export interface SetNextQuestionId {
     type: ActionTypes.SET_NEXT_QUESTION_ID,
     nextQuestionId: number
+}
+
+export interface AttachAnswer {
+    type: ActionTypes.ATTACH_ANSWER,
+    questionId: number,
+    answerId: number
 }
