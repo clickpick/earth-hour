@@ -6,9 +6,11 @@ import { getVoteSelector } from '../reducers/vote';
 import * as VoteActions from '../actions/vote';
 
 type GetQuestions = () => void;
+type SetNextQuestionId = () => void;
 
 export interface UseVote extends VoteState {
-    getQuestions: GetQuestions
+    getQuestions: GetQuestions,
+    setNextQuestionId: SetNextQuestionId
 }
 
 export default function useVote(): UseVote {
@@ -16,6 +18,7 @@ export default function useVote(): UseVote {
     const dispatch = useDispatch();
 
     const getQuestions = useCallback<GetQuestions>(() => dispatch(VoteActions.fetchQuetions()), [dispatch]);
+    const setNextQuestionId = useCallback<SetNextQuestionId>(() => dispatch(VoteActions.setNextQuestionId()), [dispatch]);
 
-    return { ...vote, getQuestions };
+    return { ...vote, getQuestions, setNextQuestionId };
 }
