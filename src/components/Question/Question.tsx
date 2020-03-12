@@ -21,10 +21,11 @@ export interface QuestionProps extends IQuestion {
     className?: string,
     currentQuestionNumber: number,
     questionsCount: number,
-    goNext(): void
+    goNext(): void,
+    attachAnswer(questionId: number, answerId: number): void
 }
 
-const Question: FC<QuestionProps> = ({ className, currentQuestionNumber, questionsCount, question, storyLink, comment, answers, goNext }: QuestionProps) => {
+const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, questionsCount, question, storyLink, comment, answers, goNext, attachAnswer }: QuestionProps) => {
     const classNames = useMemo(() => cn(className, 'Question'), [className]);
 
     const [showQuestion, setShowQuestion] = useState<boolean>(true);
@@ -38,15 +39,18 @@ const Question: FC<QuestionProps> = ({ className, currentQuestionNumber, questio
 
     const handleAnswer = useCallback((e: any) => {
         const hasRight = e.target.dataset.t;
+        const questionId = Number(e.target.dataset.questionId);
+        const answerId = Number(e.target.dataset.answerId);
 
         isRight.current = hasRight === '1';
         bridge.send('VKWebAppTapticNotificationOccurred', { type: (isRight.current) ? 'success' : 'error' });
+        attachAnswer(questionId, answerId);
         setShowResult(true);
-    }, []);
+    }, [attachAnswer]);
 
-    const handleShareFriends = useCallback(() => {
-        bridge.send('VKWebAppShare', { link: storyLink });
-    }, [storyLink]);
+    const handleShareFriends = useCallback((e: any) => {
+        bridge.send('VKWebAppShare', { link: `https://wwf-earth-hour.ezavalishin.ru/share/${e.currentTarget.dataset.questionId}` });
+    }, []);
 
     const handleShareStory = useCallback(() => {
         bridge.send('VKWebAppShowStoryBox', {
@@ -85,9 +89,11 @@ const Question: FC<QuestionProps> = ({ className, currentQuestionNumber, questio
                 key={answer.id}
                 className="margin-purple--bottom"
                 children={answer.answer}
+                data-question-id={id}
+                data-answer-id={answer.id}
                 data-t={Number(answer.isRight)}
                 onClick={handleAnswer} />),
-        [answers, handleAnswer]);
+        [id, answers, handleAnswer]);
 
     const questionView = useMemo(() => {
         if (showQuestion) {
@@ -123,6 +129,7 @@ const Question: FC<QuestionProps> = ({ className, currentQuestionNumber, questio
                     className="margin-purple--right"
                     shape="circle"
                     icon={<IconReply />}
+                    data-question-id={id}
                     onClick={handleShareFriends}
                     disabled={next}>
                     Поделиться<br />c друзьями
@@ -145,7 +152,7 @@ const Question: FC<QuestionProps> = ({ className, currentQuestionNumber, questio
                     </Button>}
             </Group>
         );
-    }, [currentQuestionNumber, questionsCount, next, hideResult, handleShareFriends, handleShareStory]);
+    }, [id, currentQuestionNumber, questionsCount, next, hideResult, handleShareFriends, handleShareStory]);
 
     const resultView = useMemo(() => {
         if (showResult) {
