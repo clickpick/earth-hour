@@ -9,6 +9,7 @@ import { HasChildren } from '../../types/props';
 
 import Headline from '../Headline';
 import Caption from '../Caption';
+import Linkify from 'react-linkify';
 
 export interface CardProps extends HTMLAttributes<HTMLElement>, HasChildren {
     size?: 'medium' | 'large',
@@ -35,7 +36,9 @@ const Card: FC<CardProps> = ({ className, href, size, poster, children, hint, di
         [poster, size]);
 
     const hintView = useMemo(() => (!!hint) &&
-        <Caption className="D(ib) margin-tomato--top color-opacity--secondary" children={hint} />,
+        <Caption className="Card__hint D(ib) margin-tomato--top color-opacity--secondary">
+            <Linkify>{hint}</Linkify>
+        </Caption>,
         [hint]);
 
     const contentView = useMemo(() =>
