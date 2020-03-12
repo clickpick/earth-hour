@@ -12,10 +12,11 @@ import Caption from '../Caption';
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, HasChildren {
     shape?: 'round' | 'circle',
     icon?: ReactNode,
-    href?: string
+    href?: string,
+    disabled?: boolean
 }
 
-const Button: FC<ButtonProps> = ({ className, shape, children, icon, href, ...restProps }: ButtonProps) => {
+const Button: FC<ButtonProps> = ({ className, shape, children, icon, href, disabled, ...restProps }: ButtonProps) => {
     const classNames = useMemo(() => cn(className, 'Button', 'Bs(bb)', 'Bs(bb)--all', 'padding-yellow', {
         [`Button--${shape}`]: shape
     }), [className, shape]);
@@ -48,7 +49,7 @@ const Button: FC<ButtonProps> = ({ className, shape, children, icon, href, ...re
     }
 
     return (
-        <button className={classNames} {...restProps}>
+        <button className={classNames} disabled={disabled} {...restProps}>
             {contentView}
         </button>
     );
