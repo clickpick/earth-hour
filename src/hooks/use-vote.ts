@@ -7,10 +7,12 @@ import * as VoteActions from '../actions/vote';
 
 type GetQuestions = () => void;
 type SetNextQuestionId = () => void;
+type AttachAnswer = (questionId: number, answerId: number) => void;
 
 export interface UseVote extends VoteState {
     getQuestions: GetQuestions,
-    setNextQuestionId: SetNextQuestionId
+    setNextQuestionId: SetNextQuestionId,
+    attachAnswer: AttachAnswer
 }
 
 export default function useVote(): UseVote {
@@ -19,6 +21,8 @@ export default function useVote(): UseVote {
 
     const getQuestions = useCallback<GetQuestions>(() => dispatch(VoteActions.fetchQuetions()), [dispatch]);
     const setNextQuestionId = useCallback<SetNextQuestionId>(() => dispatch(VoteActions.setNextQuestionId()), [dispatch]);
+    const attachAnswer = useCallback<AttachAnswer>((questionId, answerId) =>
+        dispatch(VoteActions.attachAnswer(questionId, answerId)), [dispatch]);
 
-    return { ...vote, getQuestions, setNextQuestionId };
+    return { ...vote, getQuestions, setNextQuestionId, attachAnswer };
 }
