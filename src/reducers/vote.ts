@@ -1,13 +1,13 @@
 import {
     ActionTypes,
     QuestionIds, Questions, VoteState,
-    VoteLoad, VoteSuccess, VoteFailure
+    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure;
+type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId;
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
@@ -43,6 +43,8 @@ function nextQuestionId(state = initialNextQuestionId, action: VoteReducerAction
     switch (action.type) {
         case ActionTypes.VOTE_SUCCESS:
             return action.payload.entities.votes[action.payload.result].questions[0];
+        case ActionTypes.SET_NEXT_QUESTION_ID:
+            return action.nextQuestionId;
         default:
             return state;
     }

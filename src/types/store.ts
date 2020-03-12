@@ -6,6 +6,8 @@ export enum ActionTypes {
     VOTE_REQUEST = 'VOTE_REQUEST',
     VOTE_SUCCESS = 'VOTE_SUCCESS',
     VOTE_FAILURE = 'VOTE_FAILURE',
+
+    SET_NEXT_QUESTION_ID = 'SET_NEXT_QUESTION_ID'
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -98,7 +100,7 @@ export interface VoteSuccess {
             votes: {
                 [index: string]: {
                     id: string,
-                    questions: QuestionIds
+                    questions: IdsArray
                 }
             }
         },
@@ -109,4 +111,9 @@ export interface VoteSuccess {
 export interface VoteFailure {
     type: ActionTypes.VOTE_FAILURE,
     error: string
+}
+
+export interface SetNextQuestionId {
+    type: ActionTypes.SET_NEXT_QUESTION_ID,
+    nextQuestionId: number
 }

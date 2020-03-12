@@ -10,3 +10,26 @@ export const fetchQuetions = () => ({
         schema: vote
     }
 });
+
+export const setNextQuestionId = () => (dispath: any, getState: any) => {
+    const { vote: { questionIds, nextQuestionId: currentQuestionId } } = getState();
+
+    if (!questionIds) {
+        throw new Error('questionIds is null');
+    }
+    
+    const indexCurrentQuestionId: number = questionIds.indexOf(currentQuestionId);
+
+    if (indexCurrentQuestionId === -1) {
+        throw new Error('index current question id not found');
+    }
+
+    const nextQuestionId: number = questionIds[indexCurrentQuestionId + 1];
+
+    if (!!nextQuestionId) {
+        dispath({
+            type: ActionTypes.SET_NEXT_QUESTION_ID,
+            nextQuestionId
+        });
+    }
+};
