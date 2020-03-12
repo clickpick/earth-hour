@@ -1,0 +1,57 @@
+.Question {
+    position: relative;
+}
+
+.Question__Group {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    opacity: 1;
+}
+
+.Question__Group--fade-enter {
+    animation: fade-enter 350ms ease-in;
+}
+
+.Question__Group--fade-leave {
+    animation: fade-leave 250ms ease-in;
+}
+
+.Question__Group--slide-left-leave {
+    transform-origin: bottom left;
+    animation: slide-left-leave 250ms ease-in;
+}
+
+.Question__Group--slide-right-leave {
+    transform-origin: bottom right;
+    animation: slide-right-leave 250ms ease-in;
+}
+
+@keyframes fade-enter {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-leave {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slide-left-leave {
+    to {
+        opacity: 0;
+        transform: translateX(-100px) rotate(-35deg);
+    }
+}
+
+@keyframes slide-right-leave {
+    to {
+        opacity: 0;
+        transform: translateX(100px) rotate(35deg);
+    }
+}

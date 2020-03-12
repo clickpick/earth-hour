@@ -8,4 +8,5 @@
 
 @import '../components/Button/Button.css';
 
+@import '../components/Question/Question.css';
 @import '../components/Answer/Answer.css'
