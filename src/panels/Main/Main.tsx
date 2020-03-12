@@ -1,10 +1,11 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useCallback } from 'react';
 
 import useVote from '../../hooks/use-vote';
 
+import bridge from '@vkontakte/vk-bridge';
 import { Links } from '../../config';
 
-import { Panel, PanelHeaderSimple, HorizontalScroll } from '@vkontakte/vkui';
+import { Panel, PanelHeader, HorizontalScroll } from '@vkontakte/vkui';
 import Transition from '../../components/Transition';
 import Headline from '../../components/Headline';
 import Footnote from '../../components/Footnote';
@@ -30,11 +31,15 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
 
     const hasQuestions = useMemo(() => !!questionIds, [questionIds]);
 
+    const handleShareApp = useCallback(() => {
+        bridge.send('VKWebAppShare', { link: Links.APP_LINK });
+    }, []);
+
     return (
-        <Panel id={id}>
-            <PanelHeaderSimple separator={false} />
+        <Panel id={id} separator={false}>
+            <PanelHeader />
             <Transition in={hasQuestions} timeout={500}>
-                <Headline className="margin-purple--top margin-aqua--bottom padding-orange--rl">Час земли</Headline>
+                <Headline className="margin-purple--top margin-aqua--bottom padding-orange--rl">Час Земли</Headline>
             </Transition>
             <Transition in={hasQuestions} timeout={2000}>
                 <div className="padding-orange--rl">
@@ -52,7 +57,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                             className="margin-purple--right"
                             preview={posterQuiz}
                             gradient="red-orange">
-                            Что такое<br />«Час земли»
+                            Что такое<br />«Час Земли»
                         </StoryItem>
                         <StoryItem
                             className="margin-purple--right"
@@ -70,7 +75,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                             className="margin-purple--right"
                             preview=""
                             gradient="blue-green">
-                            Час земли<br />в России
+                            Час Земли<br />в России
                         </StoryItem>
                         <StoryItem
                             preview=""
@@ -86,7 +91,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                         hint="Квиз (3 из 10 выполнено)"
                         data-to="vote"
                         onClick={goForward}>
-                        Всё об акции «Час земли»<br />за 5 минут
+                        Всё об акции «Час Земли»<br />за 5 минут
                     </Card>
                     <Card
                         className="margin-pink--bottom"
@@ -105,7 +110,8 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                             <Button
                                 className="margin-purple--right"
                                 shape="circle"
-                                icon={<IconReply />}>
+                                icon={<IconReply />}
+                                onClick={handleShareApp}>
                                 Поделиться<br />приложением
                             </Button>
                             <Button
