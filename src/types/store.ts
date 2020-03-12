@@ -52,7 +52,7 @@ export interface Answer {
 export interface Question {
     readonly id: number,
     readonly question: string,
-    readonly comment: string | null,
+    readonly comment: string,
     readonly storyLink: string,
     readonly answers: Array<Answer>
 }
