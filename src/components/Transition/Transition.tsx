@@ -6,14 +6,16 @@ import { HasChildren } from '../../types/props';
 export interface TransitionProps extends HasChildren {
     in?: boolean,
     mounted?: boolean,
-    timeout?: number
+    timeout?: number,
+    mountOnEnter?: boolean
 }
 
-const Transition: FC<TransitionProps> = ({ in: inProp, mounted, timeout, children }: TransitionProps) => {
+const Transition: FC<TransitionProps> = ({ in: inProp, mounted, timeout, mountOnEnter, children }: TransitionProps) => {
     const [show, setShow] = useState<boolean>(!!inProp);
 
     const contentView = useCallback((children) => {
         const className = cn(children.props.className, {
+            'hidden': mountOnEnter && !show,
             'fade-enter': mounted,
             'fade-exit': !mounted,
             'fade-enter-active': show,
@@ -21,7 +23,7 @@ const Transition: FC<TransitionProps> = ({ in: inProp, mounted, timeout, childre
         });
 
         return cloneElement(children, { className });
-    }, [show, mounted]);
+    }, [show, mounted, mountOnEnter]);
 
     useEffect(() => {
         if (!timeout) {
