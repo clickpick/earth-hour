@@ -5,7 +5,6 @@
 
 @import '../../node_modules/@vkontakte/vkui/src/components/View/View.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/Panel/Panel.css';
-@import '../../node_modules/@vkontakte/vkui/src/components/PanelHeader/PanelHeader.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/PanelHeaderSimple/PanelHeaderSimple.css';
 @import '../../node_modules/@vkontakte/vkui/src//components/PanelHeaderButton/PanelHeaderButton.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/FixedLayout/FixedLayout.css';
