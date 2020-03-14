@@ -5,7 +5,7 @@ import useVote from '../../hooks/use-vote';
 import bridge from '@vkontakte/vk-bridge';
 import { Links } from '../../config';
 
-import { Panel, PanelHeader, HorizontalScroll } from '@vkontakte/vkui';
+import { Panel, PanelHeaderSimple, HorizontalScroll } from '@vkontakte/vkui';
 import Transition from '../../components/Transition';
 import Headline from '../../components/Headline';
 import Footnote from '../../components/Footnote';
@@ -27,7 +27,7 @@ export interface MainProps {
 }
 
 const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
-    const { questionIds } = useVote();
+    const { questionIds, answers } = useVote();
 
     const hasQuestions = useMemo(() => !!questionIds, [questionIds]);
 
@@ -37,7 +37,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
 
     return (
         <Panel id={id} separator={false}>
-            <PanelHeader />
+            <PanelHeaderSimple separator={false} />
             <Transition in={hasQuestions} timeout={500}>
                 <Headline className="margin-purple--top margin-aqua--bottom padding-orange--rl">Час Земли</Headline>
             </Transition>
@@ -50,7 +50,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                     </Footnote>
                 </div>
             </Transition>
-            <Transition in={hasQuestions} timeout={4000}>
+            <Transition in={hasQuestions} timeout={4000} mountOnEnter>
                 <HorizontalScroll className="margin-pink--bottom">
                     <Group className="padding-orange--rl">
                         <StoryItem
@@ -88,18 +88,16 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                     <Card
                         className="margin-pink--bottom"
                         poster={posterQuiz}
-                        hint="Квиз (3 из 10 выполнено)"
+                        hint={`Квиз (${answers.length} из ${questionIds?.length} выполнено)`}
                         data-to="vote"
                         onClick={goForward}>
-                        Всё об акции «Час Земли»<br />за 5 минут
+                        Всё об акции «Час Земли» за 5 минут
                     </Card>
                     <Card
                         className="margin-pink--bottom"
                         poster={posterQuiz2}
-                        hint="Квиз будет доступен 28 марта"
-                        data-to="vote"
-                        onClick={goForward}>
-                        Узнай, кто ты для планеты,<br />и получи подарок от WWF
+                        hint="Квиз будет доступен 28 марта">
+                        Узнай, кто ты для планеты, и получи подарок от WWF
                     </Card>
 
                     <Group vertical center>
