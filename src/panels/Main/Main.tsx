@@ -4,15 +4,16 @@ import useVote from '../../hooks/use-vote';
 
 import bridge from '@vkontakte/vk-bridge';
 import { Links } from '../../config';
+import { stories } from '../../stories';
 
-import { Panel, PanelHeaderSimple, HorizontalScroll } from '@vkontakte/vkui';
+import { Panel, PanelHeaderSimple } from '@vkontakte/vkui';
 import Transition from '../../components/Transition';
 import Headline from '../../components/Headline';
 import Footnote from '../../components/Footnote';
 import Card from '../../components/Card';
 import Group from '../../components/Group';
-import StoryItem from '../../components/StoryItem';
 import Button from '../../components/Button';
+import Stories from '../../components/Stories';
 
 import posterQuiz from '../../images/poster-quiz.png';
 import posterQuiz2 from '../../images/poster-quiz-2.jpg';
@@ -51,39 +52,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                 </div>
             </Transition>
             <Transition in={hasQuestions} timeout={4000} mountOnEnter>
-                <HorizontalScroll className="margin-pink--bottom">
-                    <Group className="padding-orange--rl">
-                        <StoryItem
-                            className="margin-purple--right"
-                            preview={posterQuiz}
-                            gradient="red-orange">
-                            Что такое<br />«Час Земли»
-                        </StoryItem>
-                        <StoryItem
-                            className="margin-purple--right"
-                            preview=""
-                            gradient="orange-yellow">
-                            С чего всё<br />начиналось
-                        </StoryItem>
-                        <StoryItem
-                            className="margin-purple--right"
-                            preview=""
-                            gradient="green-yellow">
-                            Подарок<br />от WWF
-                        </StoryItem>
-                        <StoryItem
-                            className="margin-purple--right"
-                            preview=""
-                            gradient="blue-green">
-                            Час Земли<br />в России
-                        </StoryItem>
-                        <StoryItem
-                            preview=""
-                            gradient="purple-aqua">
-                            Что будет в<br />2020 году
-                        </StoryItem>
-                    </Group>
-                </HorizontalScroll>
+                <Stories className="margin-pink--bottom" stories={stories} />
                 <Group className="margin-pink--bottom padding-orange--rl" vertical>
                     <Card
                         className="margin-pink--bottom"
