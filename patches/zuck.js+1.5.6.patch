@@ -1,0 +1,13 @@
+diff --git a/node_modules/zuck.js/src/zuck.js b/node_modules/zuck.js/src/zuck.js
+index 039fca5..c945178 100644
+--- a/node_modules/zuck.js/src/zuck.js
++++ b/node_modules/zuck.js/src/zuck.js
+@@ -1034,7 +1034,7 @@ module.exports = (window => {
+       
+         zuck.data[storyId].id = storyId; // story id
+         zuck.data[storyId].photo = story.getAttribute('data-photo'); // story preview (or user photo)
+-        zuck.data[storyId].name = story.querySelector('.name').innerText;
++        zuck.data[storyId].name = story.querySelector('.name').textContent;
+         zuck.data[storyId].link = story.querySelector('.item-link').getAttribute('href');
+         zuck.data[storyId].lastUpdated = story.getAttribute('data-last-updated');
+         zuck.data[storyId].seen = seen;
