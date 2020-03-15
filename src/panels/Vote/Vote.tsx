@@ -1,14 +1,12 @@
 import React, { FC, useMemo, useEffect } from 'react';
 
+import { PanelSecondary } from '../../types/props';
 import useVote from '../../hooks/use-vote';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack } from '@vkontakte/vkui';
 import Question from '../../components/Question';
 
-export interface VoteProps {
-    id: string,
-    goBack: () => void
-}
+export interface VoteProps extends PanelSecondary { }
 
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const { questionIds, questions, nextQuestionId, setNextQuestionId, attachAnswer } = useVote();
