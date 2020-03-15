@@ -13,3 +13,7 @@
 .Group--start {
     align-items: flex-start;
 }
+
+.Group--end {
+    align-items: flex-end;
+}
