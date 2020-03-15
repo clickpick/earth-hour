@@ -1,5 +1,8 @@
 import React, { FC, useMemo } from 'react';
 
+import { PanelPrimary } from '../../types/props';
+import { HomePanels } from '../../types/panels';
+
 import useVote from '../../hooks/use-vote';
 
 import { stories } from '../../stories';
@@ -16,10 +19,7 @@ import About from '../../components/About';
 import posterQuiz from '../../images/poster-quiz.png';
 import posterQuiz2 from '../../images/poster-quiz-2.jpg';
 
-export interface MainProps {
-    id: string,
-    goForward: (e: any) => void
-}
+export interface MainProps extends PanelPrimary { }
 
 const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
     const { questionIds, answers } = useVote();
@@ -48,14 +48,16 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                         className="margin-pink--bottom"
                         poster={posterQuiz}
                         hint={`Квиз (${answers.length} из ${questionIds?.length} выполнено)`}
-                        data-to="vote"
+                        data-to={HomePanels.VOTE}
                         onClick={goForward}>
                         Всё об акции «Час Земли» за 5 минут
                     </Card>
                     <Card
                         className="margin-pink--bottom"
                         poster={posterQuiz2}
-                        hint="Квиз будет доступен 28 марта">
+                        hint="Квиз будет доступен 28 марта"
+                        data-to={HomePanels.VOTE_2}
+                        onClick={goForward}>
                         Узнай, кто ты для планеты, и получи подарок от WWF
                     </Card>
                     <About />
