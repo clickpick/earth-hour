@@ -1,13 +1,13 @@
 import {
     ActionTypes,
     User, UserState,
-    UserAuthLoad, UserAuthSuccess, UserAuthFailure
+    UserAuthLoad, UserAuthSuccess, UserAuthFailure, UserToggleNotificationsSuccess
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type UserReducerActions = UserAuthLoad | UserAuthSuccess | UserAuthFailure;
+type UserReducerActions = UserAuthLoad | UserAuthSuccess | UserAuthFailure | UserToggleNotificationsSuccess;
 
 const initialData: User | null = null;
 
@@ -18,11 +18,13 @@ export const userInitialState: UserState = {
 };
 
 function data(state = initialData, action: UserReducerActions): User | null {
-    if (action.type === ActionTypes.USER_AUTH_SUCCESS) {
-        return action.payload.result;
+    switch (action.type) {
+        case ActionTypes.USER_AUTH_SUCCESS:
+        case ActionTypes.USER_TOGGLE_NOTIFICATIONS_SUCCESS:
+            return action.payload.result;
+        default:
+            return state;
     }
-
-    return state;
 }
 
 export default function userReducer(state = userInitialState, action: UserReducerActions): UserState {

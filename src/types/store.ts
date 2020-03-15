@@ -3,6 +3,8 @@ export enum ActionTypes {
     USER_AUTH_SUCCESS = 'USER_AUTH_SUCCESS',
     USER_AUTH_FAILURE = 'USER_AUTH_FAILURE',
 
+    USER_TOGGLE_NOTIFICATIONS_SUCCESS = 'USER_TOGGLE_NOTIFICATIONS_SUCCESS',
+
     VOTE_REQUEST = 'VOTE_REQUEST',
     VOTE_SUCCESS = 'VOTE_SUCCESS',
     VOTE_FAILURE = 'VOTE_FAILURE',
@@ -92,6 +94,11 @@ export interface UserAuthSuccess {
 export interface UserAuthFailure {
     type: ActionTypes.USER_AUTH_FAILURE,
     error: string
+}
+
+export interface UserToggleNotificationsSuccess {
+    type: ActionTypes.USER_TOGGLE_NOTIFICATIONS_SUCCESS,
+    payload: { result: User }
 }
 
 /* Vote */

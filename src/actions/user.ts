@@ -9,3 +9,13 @@ export const auth = () => ({
         schema: {}
     }
 });
+
+export const toggleNotifications = (value = false) => ({
+    [CALL_API]: {
+        types: [ActionTypes.USER_AUTH_REQUEST, ActionTypes.USER_TOGGLE_NOTIFICATIONS_SUCCESS, ActionTypes.USER_AUTH_FAILURE],
+        endpoint: '/notifications',
+        method: Methods.POST,
+        schema: {},
+        data: { value }
+    }
+});
