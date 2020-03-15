@@ -6,9 +6,11 @@ import { getUserSelector } from '../reducers/user';
 import * as UserActions from '../actions/user';
 
 type Auth = () => void;
+type ToggleNotifications = (value: boolean) => void
 
 export interface UseUser extends UserState {
-    auth: Auth
+    auth: Auth,
+    toggleNotifications: ToggleNotifications,
 }
 
 export default function useUser(): UseUser {
@@ -16,6 +18,9 @@ export default function useUser(): UseUser {
     const dispatch = useDispatch();
 
     const auth = useCallback<Auth>(() => dispatch(UserActions.auth()), [dispatch]);
+    const toggleNotifications = useCallback<ToggleNotifications>((value) =>
+        dispatch(UserActions.toggleNotifications(value)),
+        [dispatch]);
 
-    return { ...user, auth };
+    return { ...user, auth, toggleNotifications };
 }
