@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import { HomePanels } from '../types/panels';
+
 import usePanels from '../hooks/use-panels';
 
 import { View } from '@vkontakte/vkui';
@@ -8,11 +10,6 @@ import Vote from '../panels/Vote';
 
 export interface HomeProps {
     id: string
-}
-
-export enum HomePanels {
-    MAIN = 'main',
-    VOTE = 'vote'
 }
 
 const Home: FC<HomeProps> = ({ id }: HomeProps) => {
