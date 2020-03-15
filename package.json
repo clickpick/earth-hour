@@ -42,6 +42,8 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@vkontakte/vk-miniapps-deploy": "^0.0.13",
+    "patch-package": "^6.2.1",
+    "postinstall-postinstall": "^2.0.0",
     "react-scripts": "3.4.0",
     "typescript": "~3.7.2"
   },
