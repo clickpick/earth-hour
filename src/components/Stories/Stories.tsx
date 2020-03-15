@@ -8,7 +8,7 @@ import cn from 'classnames';
 import { Story, StoryItem as IStoryItem } from '../../types/props';
 
 // @ts-ignore
-import Zuck from 'zuck.js/src/zuck';
+import Zuck from 'zuck.js';
 
 import StoryItem from '../../components/StoryItem';
 
