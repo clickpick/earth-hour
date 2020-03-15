@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 export interface HasChildren {
     children?: ReactNode
@@ -26,4 +26,16 @@ export interface StoryItem {
     src: string
     time: number
     type: 'photo' | 'video'
+}
+
+export interface Panel {
+    id: string
+}
+
+export interface PanelPrimary extends Panel {
+    goForward(e: SyntheticEvent<HTMLElement>): void 
+}
+
+export interface PanelSecondary extends Panel {
+    goBack(): void
 }
