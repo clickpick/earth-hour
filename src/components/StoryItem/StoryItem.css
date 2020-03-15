@@ -1,8 +1,5 @@
 .StoryItem {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
 
     border: none;
 
@@ -14,6 +11,16 @@
 }
 
 .StoryItem__wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 100%;
+}
+
+.StoryItem__photo-wrapper {
     position: relative;
 
     width: 80px;
@@ -22,24 +29,29 @@
     border-radius: 50%;
 }
 
-.StoryItem--red-orange .StoryItem__wrapper {
+.StoryItem--red-orange .StoryItem__photo-wrapper {
     background-image: var(--gradient-red-orange);
 }
 
-.StoryItem--orange-yellow .StoryItem__wrapper {
+.StoryItem--orange-yellow .StoryItem__photo-wrapper {
     background-image: var(--gradient-orange-yellow);
 }
 
-.StoryItem--green-yellow .StoryItem__wrapper {
+.StoryItem--green-yellow .StoryItem__photo-wrapper {
     background-image: var(--gradient-green-yellow);
 }
 
-.StoryItem--blue-green .StoryItem__wrapper {
+.StoryItem--blue-green .StoryItem__photo-wrapper {
     background-image: var(--gradient-blue-green);
 }
 
-.StoryItem--purple-aqua .StoryItem__wrapper {
+.StoryItem--purple-aqua .StoryItem__photo-wrapper {
     background-image: var(--gradient-purple-aqua);
+}
+
+.StoryItem--seen .StoryItem__photo-wrapper {
+    background-image: none;
+    background-color: silver;
 }
 
 .StoryItem__preview {
@@ -60,4 +72,13 @@
     background-repeat: no-repeat;
 
     overflow: hidden;
+}
+
+.StoryItem__preview img,
+.StoryItem__time {
+    display: none;
+}
+
+.StoryItem__info {
+    white-space: normal;
 }
