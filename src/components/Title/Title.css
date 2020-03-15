@@ -1,0 +1,7 @@
+.Title {
+    font-size: 20px; /* fallback */
+    font-size: var(--font-size-20);
+    font-weight: 500; /* fallback */
+    font-weight: var(--font-weight-medium);
+    line-height: 28px;
+}
