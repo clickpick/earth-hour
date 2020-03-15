@@ -4,9 +4,12 @@ export interface HasChildren {
     children?: ReactNode
 }
 
+export type Gradient = 'red-orange' | 'orange-yellow' | 'green-yellow' | 'blue-green' | 'purple-aqua';
+
 export interface Story {
     id: string,
     name: string,
+    gradient: Gradient,
     photo: string,
     seen: boolean,
     lastUpdated: number

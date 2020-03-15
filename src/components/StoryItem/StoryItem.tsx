@@ -1,13 +1,13 @@
 import React, { FC, HTMLAttributes, useMemo, memo } from 'react';
 import cn from 'classnames';
 
-import { HasChildren } from '../../types/props';
+import { HasChildren, Gradient } from '../../types/props';
 
 import Caption from '../Caption';
 
 export interface StoryItemProps extends HTMLAttributes<HTMLButtonElement>, HasChildren {
     seen?: boolean,
-    gradient?: 'red-orange' | 'orange-yellow' | 'green-yellow' | 'blue-green' | 'purple-aqua',
+    gradient?: Gradient,
     photo: string,
     name: string,
     lastUpdated: number

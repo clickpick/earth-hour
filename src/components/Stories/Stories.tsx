@@ -32,13 +32,13 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
             // cubeEffect: true,
             autoFullScreen: true,
             previousTap: true,
-            localStorage: true,
+            localStorage: false,
             reactive: true,
             stories,
             callbacks: {
                 onDataUpdate: function (currentState: any, callback: any) {
                     setState(currentState);
-                    setTimeout(callback, 200);
+                    // setTimeout(callback, 200);
                 }
             }
         });
@@ -66,6 +66,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
                     seen={story.seen}
                     photo={story.photo}
                     name={story.name}
+                    gradient={story.gradient}
                     lastUpdated={story.lastUpdated}>
                     <ul className="items">
                         {items}
