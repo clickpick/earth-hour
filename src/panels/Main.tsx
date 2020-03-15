@@ -1,23 +1,23 @@
 import React, { FC, useMemo } from 'react';
 
-import { PanelPrimary } from '../../types/props';
-import { HomePanels } from '../../types/panels';
+import { PanelPrimary } from '../types/props';
+import { HomePanels } from '../types/panels';
 
-import useVote from '../../hooks/use-vote';
+import useVote from '../hooks/use-vote';
 
-import { stories } from '../../stories';
+import { stories } from '../stories';
 
 import { Panel, PanelHeaderSimple } from '@vkontakte/vkui';
-import Transition from '../../components/Transition';
-import Headline from '../../components/Headline';
-import Footnote from '../../components/Footnote';
-import Card from '../../components/Card';
-import Group from '../../components/Group';
-import Stories from '../../components/Stories';
-import About from '../../components/About';
+import Transition from '../components/Transition';
+import Headline from '../components/Headline';
+import Footnote from '../components/Footnote';
+import Card from '../components/Card';
+import Group from '../components/Group';
+import Stories from '../components/Stories';
+import About from '../components/About';
 
-import posterQuiz from '../../images/poster-quiz.png';
-import posterQuiz2 from '../../images/poster-quiz-2.jpg';
+import posterQuiz from '../images/poster-quiz.png';
+import posterQuiz2 from '../images/poster-quiz-2.jpg';
 
 export interface MainProps extends PanelPrimary { }
 
