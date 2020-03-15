@@ -1,13 +1,115 @@
+diff --git a/node_modules/zuck.js/src/styles/modal.css b/node_modules/zuck.js/src/styles/modal.css
+index 00962bd..e3396ea 100644
+--- a/node_modules/zuck.js/src/styles/modal.css
++++ b/node_modules/zuck.js/src/styles/modal.css
+@@ -60,6 +60,10 @@
+   transform: translateY(100%);
+ }
+ 
++#zuck-modal.with-effects.closed-up {
++  transform: translateY(-100%);
++}
++
+ #zuck-modal .slider {
+   width: 300vw;
+   height: 100%;
 diff --git a/node_modules/zuck.js/src/zuck.js b/node_modules/zuck.js/src/zuck.js
-index 039fca5..c945178 100644
+index 039fca5..dbe3ccb 100644
 --- a/node_modules/zuck.js/src/zuck.js
 +++ b/node_modules/zuck.js/src/zuck.js
-@@ -1034,7 +1034,7 @@ module.exports = (window => {
+@@ -168,6 +168,16 @@ module.exports = (window => {
+       }
+     };
+ 
++    const translateY = function (element, to, duration, ease) {
++      const transform = `translate3d(0, ${to}px, 0)`;
++
++      if (element) {
++        setVendorVariable(element.style, 'TransitionTimingFunction', ease);
++        setVendorVariable(element.style, 'TransitionDuration', `${duration}ms`);
++        setVendorVariable(element.style, 'Transform', transform);
++      }
++    };
++  
+     const findPos = function (obj, offsetY, offsetX, stop) {
+       let curleft = 0;
+       let curtop = 0;
+@@ -434,10 +444,11 @@ module.exports = (window => {
+         }
+ 
+         onTransitionEnd(modalZuckContainer, () => {
+-          if (modalZuckContainer.classList.contains('closed')) {
++          if (modalZuckContainer.classList.contains('closed') || modalZuckContainer.classList.contains('closed-up')) {
+             modalContent.innerHTML = '';
+             modalZuckContainer.style.display = 'none';
+             modalZuckContainer.classList.remove('closed');
++            modalZuckContainer.classList.remove('closed-up');
+             modalZuckContainer.classList.remove('animated');
+           }
+         });
+@@ -752,6 +763,12 @@ module.exports = (window => {
+               );
+             }
+ 
++            if (isScrolling && touchOffset) {
++              event.preventDefault();
++
++              translateY(modalSlider, position.y + delta.y, 0, null);
++            }
++
+             if (!isScrolling && touchOffset) {
+               event.preventDefault();
+ 
+@@ -766,6 +783,7 @@ module.exports = (window => {
+           
+           const duration = touchOffset ? Date.now() - touchOffset.time : undefined;
+           const isValid = (Number(duration) < 300 && Math.abs(delta.x) > 25) || Math.abs(delta.x) > modalContainer.slideWidth / 3;
++          const isActionToClose = (Number(duration) < 300 && Math.abs(delta.y) > 25) || Math.abs(delta.y) > modalContainer.slideHeight / 3;
+           const direction = delta.x < 0;
+ 
+           const index = direction ? query('#zuck-modal .story-viewer.next') : query('#zuck-modal .story-viewer.previous');
+@@ -781,6 +799,12 @@ module.exports = (window => {
+                 } else {
+                   translate(modalSlider, position.x, 300);
+                 }
++              } else {
++                if (isActionToClose) {
++                  modal.close(delta.y < 0);
++                } else {
++                  translateY(modalSlider, position.y, 300);
++                }
+               }
+ 
+               touchOffset = undefined;
+@@ -952,9 +976,10 @@ module.exports = (window => {
+             callback
+           );
+         },
+-        close () {
++        close(isDirectionUp = false) {
+           const modalContainer = query('#zuck-modal');
+           
++
+           const callback = function () {
+             if (option('backNative')) {
+               window.location.hash = '';
+@@ -963,7 +988,8 @@ module.exports = (window => {
+             fullScreen(modalContainer, true);
+ 
+             if (option('openEffect')) {
+-              modalContainer.classList.add('closed');
++              const classNameToClose = isDirectionUp ? 'closed-up' : 'closed';
++              modalContainer.classList.add(classNameToClose);
+             } else {
+               modalContent.innerHTML = '';
+               modalContainer.style.display = 'none';
+@@ -1034,7 +1060,8 @@ module.exports = (window => {
        
          zuck.data[storyId].id = storyId; // story id
          zuck.data[storyId].photo = story.getAttribute('data-photo'); // story preview (or user photo)
 -        zuck.data[storyId].name = story.querySelector('.name').innerText;
 +        zuck.data[storyId].name = story.querySelector('.name').textContent;
++        
          zuck.data[storyId].link = story.querySelector('.item-link').getAttribute('href');
          zuck.data[storyId].lastUpdated = story.getAttribute('data-last-updated');
          zuck.data[storyId].seen = seen;
