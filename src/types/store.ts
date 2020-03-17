@@ -71,7 +71,7 @@ export interface UserAnswer {
 export interface VoteState extends DataState {
     readonly questionIds: QuestionIds,
     readonly questions: Questions,
-    readonly nextQuestionId: number,
+    readonly nextQuestionId: number | null,
     readonly answers: Array<UserAnswer>
 }
 

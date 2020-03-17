@@ -18,15 +18,12 @@ export const setNextQuestionId = () => (dispath: any, getState: any) => {
         throw new Error('questionIds is null');
     }
 
+    const nextQuestionId: number | null = questionIds[answers.length] || null;
 
-    const nextQuestionId: number = questionIds[answers.length];
-
-    if (!!nextQuestionId) {
-        dispath({
-            type: ActionTypes.SET_NEXT_QUESTION_ID,
-            nextQuestionId
-        });
-    }
+    dispath({
+        type: ActionTypes.SET_NEXT_QUESTION_ID,
+        nextQuestionId
+    });
 };
 
 export const attachAnswer = (questionId: number, answerId: number) => ({

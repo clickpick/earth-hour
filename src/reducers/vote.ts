@@ -11,7 +11,7 @@ type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestion
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
-const initialNextQuestionId: number = 0;
+const initialNextQuestionId: number | null = 0;
 const initialAnswers: Array<UserAnswer> = [];
 
 export const voteInitialState: VoteState = {
@@ -41,7 +41,7 @@ function questions(state = initialQuesitions, action: VoteReducerActions): Quest
     }
 }
 
-function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number {
+function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number | null {
     switch (action.type) {
         case ActionTypes.VOTE_SUCCESS:
             return action.payload.entities.votes[action.payload.result].questions[0];
