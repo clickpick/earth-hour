@@ -13,6 +13,8 @@ export enum ActionTypes {
     ATTACH_ANSWER = 'ATTACH_ANSWER',
     SET_IS_RIGHT_ANSWERS_COUNT = 'SET_IS_RIGHT_ANSWERS_COUNT',
 
+    SET_FINISH = 'SET_FINISH',
+
     RESET_QUIZ = 'RESET_QUIZ',
 }
 
@@ -41,7 +43,8 @@ export interface Action {
 export interface User {
     readonly vkUserId: number,
     readonly messagesAreEnabled: boolean,
-    readonly notificationsAreEnabled: boolean
+    readonly notificationsAreEnabled: boolean,
+    readonly successfulPolls: Array<{ id: number }>
 }
 
 export interface UserState extends DataState {
@@ -77,6 +80,7 @@ export interface VoteState extends DataState {
     readonly nextQuestionId: number | null,
     readonly answers: Array<UserAnswer>
     readonly isRightAnswersCount: number,
+    readonly finish: boolean
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -145,6 +149,11 @@ export interface AttachAnswer {
 export interface SetIsRightAnswersCount {
     type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
     count: number
+}
+
+export interface SetFinish {
+    type: ActionTypes.SET_FINISH,
+    payload: { result: { success: boolean } }
 }
 
 export interface ResetQuiz {

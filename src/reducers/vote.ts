@@ -1,19 +1,21 @@
 import {
     ActionTypes,
     QuestionIds, Questions, UserAnswer, VoteState,
-    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount, ResetQuiz
+    VoteLoad, VoteSuccess, VoteFailure, UserAuthSuccess,
+    SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount, SetFinish, ResetQuiz
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId | AttachAnswer | SetIsRightAnswersCount | ResetQuiz;
+type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | UserAuthSuccess | SetNextQuestionId | AttachAnswer | SetIsRightAnswersCount | SetFinish | ResetQuiz;
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
 const initialNextQuestionId: number | null = 0;
 const initialAnswers: Array<UserAnswer> = [];
 const initialIsRightAnswersCount: number = 0;
+const initialFinish: boolean = false;
 
 export const voteInitialState: VoteState = {
     pending: initialPending,
@@ -22,7 +24,8 @@ export const voteInitialState: VoteState = {
     questions: initialQuesitions,
     nextQuestionId: initialNextQuestionId,
     answers: initialAnswers,
-    isRightAnswersCount: initialIsRightAnswersCount
+    isRightAnswersCount: initialIsRightAnswersCount,
+    finish: initialFinish
 };
 
 function questionIds(state = initialQuesitionIds, action: VoteReducerActions): QuestionIds {
@@ -45,8 +48,14 @@ function questions(state = initialQuesitions, action: VoteReducerActions): Quest
 
 function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number | null {
     switch (action.type) {
+        case ActionTypes.USER_AUTH_SUCCESS:
+            return (action.payload.result.successfulPolls[0] && action.payload.result.successfulPolls[0].id === 1)
+                ? null
+                : state;
         case ActionTypes.VOTE_SUCCESS:
-            return action.payload.entities.votes[action.payload.result].questions[0];
+            return (state === null)
+                ? null
+                : action.payload.entities.votes[action.payload.result].questions[0];
         case ActionTypes.SET_NEXT_QUESTION_ID:
         case ActionTypes.RESET_QUIZ:
             return action.nextQuestionId;
@@ -82,6 +91,24 @@ function isRightAnswersCount(state = initialIsRightAnswersCount, action: VoteRed
     return state;
 }
 
+function finish(state = initialFinish, action: VoteReducerActions): boolean {
+    if (action.type === ActionTypes.USER_AUTH_SUCCESS) {
+        if (action.payload.result.successfulPolls[0] && action.payload.result.successfulPolls[0].id === 1) {
+            return true;
+        }
+    }
+
+    if (action.type === ActionTypes.SET_FINISH) {
+        return action.payload.result.success;
+    }
+
+    if (action.type === ActionTypes.RESET_QUIZ) {
+        return false;
+    }
+
+    return state;
+}
+
 export default function vote(state = voteInitialState, action: VoteReducerActions): VoteState {
     return {
         pending: isPending<VoteReducerActions>(state.pending, action, [ActionTypes.VOTE_REQUEST, ActionTypes.VOTE_SUCCESS, ActionTypes.VOTE_FAILURE]),
@@ -90,7 +117,8 @@ export default function vote(state = voteInitialState, action: VoteReducerAction
         questions: questions(state.questions, action),
         nextQuestionId: nextQuestionId(state.nextQuestionId, action),
         answers: answers(state.answers, action),
-        isRightAnswersCount: isRightAnswersCount(state.isRightAnswersCount, action)
+        isRightAnswersCount: isRightAnswersCount(state.isRightAnswersCount, action),
+        finish: finish(state.finish, action)
     };
 }
 
