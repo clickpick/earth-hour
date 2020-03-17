@@ -7,7 +7,7 @@ import cn from 'classnames';
 
 import { HasChildren } from '../../types/props';
 
-import Headline from '../Headline';
+import Title from '../Title';
 import Caption from '../Caption';
 import Linkify from 'react-linkify';
 
@@ -46,7 +46,7 @@ const Card: FC<CardProps> = ({ className, href, size, poster, children, hint, di
             'padding-blue': size === 'large',
             'color-opacity--secondary': disabled
         })}>
-            <Headline children={children} />
+            <Title children={children} />
             {hintView}
         </div>,
         [size, disabled, children, hintView]);
