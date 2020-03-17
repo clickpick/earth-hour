@@ -1,3 +1,5 @@
+export const WWF_GROUP_ID = 348403;
+
 export enum Links {
     APP_LINK = 'https://vk.com/app7350422',
     WWF = 'https://vk.com/wwf',
