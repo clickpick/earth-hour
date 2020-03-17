@@ -3,6 +3,7 @@ import React, { FC, useRef, useCallback, useMemo, useEffect } from 'react';
 import { PanelSecondary } from '../types/props';
 import useVote from '../hooks/use-vote';
 import { resultProps } from '../config';
+import { shareApp } from '../helpers/vk';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack } from '@vkontakte/vkui';
 import Question from '../components/Question';
@@ -88,7 +89,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                         className="margin-purple--right"
                         shape="circle"
                         icon={<IconReply />}
-                        onClick={undefined}>
+                        onClick={shareApp}>
                         Поделиться<br />приложением
                     </Button>
                     {(showPrize)
