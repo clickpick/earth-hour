@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { VoteState } from '../types/store';
+import { VoteState, UserAnswer } from '../types/store';
 import { getVoteSelector } from '../reducers/vote';
 import * as VoteActions from '../actions/vote';
 
@@ -10,12 +10,14 @@ type SetNextQuestionId = () => void;
 type AttachAnswer = (questionId: number, answerId: number) => void;
 type SetIsRightAnswersCount = (count: number) => void;
 type ResetQuiz = () => void;
+type SendAnswers = (answers: Array<UserAnswer>) => void
 
 export interface UseVote extends VoteState {
     getQuestions: GetQuestions,
     setNextQuestionId: SetNextQuestionId,
     attachAnswer: AttachAnswer,
     setIsRightAnswersCount: SetIsRightAnswersCount,
+    sendAnswers: SendAnswers, 
     resetQuiz: ResetQuiz
 }
 
@@ -29,7 +31,8 @@ export default function useVote(): UseVote {
         dispatch(VoteActions.attachAnswer(questionId, answerId)), [dispatch]);
     const setIsRightAnswersCount = useCallback<SetIsRightAnswersCount>((count) =>
         dispatch(VoteActions.setIsRightAnswersCount(count)), [dispatch]);
+    const sendAnswers = useCallback<SendAnswers>((answers) => dispatch(VoteActions.sendAnswers(answers)), [dispatch]);
     const resetQuiz = useCallback<ResetQuiz>(() => dispatch(VoteActions.resetQuiz()), [dispatch]);
 
-    return { ...vote, getQuestions, setNextQuestionId, attachAnswer, setIsRightAnswersCount, resetQuiz };
+    return { ...vote, getQuestions, setNextQuestionId, attachAnswer, setIsRightAnswersCount, sendAnswers, resetQuiz };
 }
