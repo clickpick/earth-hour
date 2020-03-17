@@ -19,7 +19,7 @@ const About: FC<AboutProps> = (props: AboutProps) => {
     return (
         <Group vertical center {...props}>
             <WWFLogo className="margin-aqua--bottom" />
-            <Headline>WWF Россия</Headline>
+            <Headline>WWF России</Headline>
             <Footnote className="margin-purple--bottom color-opacity--secondary">Организатор акции</Footnote>
             <Group>
                 <Button
