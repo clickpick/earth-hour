@@ -21,7 +21,7 @@ const About: FC<AboutProps> = (props: AboutProps) => {
             <WWFLogo className="margin-aqua--bottom" />
             <Headline>WWF России</Headline>
             <Footnote className="margin-purple--bottom color-opacity--secondary">Организатор акции</Footnote>
-            <Group>
+            <Group start>
                 <Button
                     className="margin-purple--right"
                     shape="circle"
