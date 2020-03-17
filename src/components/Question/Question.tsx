@@ -12,7 +12,7 @@ import Group from '../Group';
 import Card from '../Card';
 import Button from '../Button';
 
-import posterQuiz from '../../images/poster-quiz.png';
+import posterQuiz from '../../images/poster-quiz-mini.png';
 import { ReactComponent as IconReply } from '../../svg/reply.svg';
 import { ReactComponent as IconUnion } from '../../svg/union.svg';
 import { ReactComponent as IconNext } from '../../svg/next.svg';
@@ -90,8 +90,7 @@ const Question: FC<QuestionProps> = ({
                 <div className={classNames} onAnimationEnd={handleAnimationEnd}>
                     <Group className="padding-blue" vertical>
                         {hintView}
-                        <Title className="margin-aqua--bottom">{question}</Title>
-                        <img className="margin-pink--bottom" src={posterQuiz} alt="Час Земли" width="100%" height="131" />
+                        <Title className="margin-pink--bottom">{question}</Title>
                         {answersView}
                     </Group>
                 </div>
