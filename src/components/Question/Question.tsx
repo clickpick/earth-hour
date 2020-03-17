@@ -6,7 +6,7 @@ import { Question as IQuestion, Answer as IAnswer } from '../../types/store';
 import bridge from '@vkontakte/vk-bridge';
 
 import Caption from '../Caption';
-import Headline from '../Headline';
+import Title from '../Title';
 import Answer from '../Answer';
 import Group from '../Group';
 import Card from '../Card';
@@ -109,7 +109,7 @@ const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, que
                 <div className={classNames} onAnimationEnd={handleAnimationEnd}>
                     <Group className="padding-blue" vertical>
                         {hintView}
-                        <Headline className="margin-aqua--bottom">{question}</Headline>
+                        <Title className="margin-aqua--bottom">{question}</Title>
                         <img className="margin-pink--bottom" src={posterQuiz} alt="Час Земли" width="100%" height="131" />
                         {answersView}
                     </Group>
