@@ -22,3 +22,6 @@ export const showStoryBox = (stickerUrl: string) =>
             }
         ]
     });
+
+export const tapticNotification = (type: 'success' | 'warning' | 'error') =>
+    bridge.send('VKWebAppTapticNotificationOccurred', { type });
