@@ -38,7 +38,7 @@ const Vote2: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                 className="margin-pink--bottom padding-blue--rl"
                 mood="lock"
                 title="Этот квиз будет доступен 28 марта"
-                message="После его прохождения, ты сможешь получить подарок от WWF." />
+                message="После его прохождения ты сможешь получить подарок от WWF." />
             <Transition in={!data?.notificationsAreEnabled} mountOnEnter>
                 <Group className="margin-pink--bottom" vertical center>
                     <Button
