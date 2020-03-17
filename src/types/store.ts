@@ -11,7 +11,9 @@ export enum ActionTypes {
 
     SET_NEXT_QUESTION_ID = 'SET_NEXT_QUESTION_ID',
     ATTACH_ANSWER = 'ATTACH_ANSWER',
-    SET_IS_RIGHT_ANSWERS_COUNT = 'SET_IS_RIGHT_ANSWERS_COUNT'
+    SET_IS_RIGHT_ANSWERS_COUNT = 'SET_IS_RIGHT_ANSWERS_COUNT',
+
+    RESET_QUIZ = 'RESET_QUIZ',
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -143,4 +145,9 @@ export interface AttachAnswer {
 export interface SetIsRightAnswersCount {
     type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
     count: number
+}
+
+export interface ResetQuiz {
+    type: ActionTypes.RESET_QUIZ,
+    nextQuestionId: number
 }

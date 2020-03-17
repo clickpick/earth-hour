@@ -36,3 +36,18 @@ export const setIsRightAnswersCount = (count: number) => ({
     type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
     count
 });
+
+export const resetQuiz = () => (dispath: any, getState: any) => {
+    const { vote: { questionIds } } = getState();
+
+    if (!questionIds) {
+        throw new Error('questionIds is null');
+    }
+
+    const nextQuestionId: number | null = questionIds[0] || null;
+
+    dispath({
+        type: ActionTypes.RESET_QUIZ,
+        nextQuestionId
+    });
+};

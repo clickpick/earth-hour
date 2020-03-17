@@ -1,13 +1,13 @@
 import {
     ActionTypes,
     QuestionIds, Questions, UserAnswer, VoteState,
-    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount
+    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount, ResetQuiz
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId | AttachAnswer | SetIsRightAnswersCount;
+type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId | AttachAnswer | SetIsRightAnswersCount | ResetQuiz;
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
@@ -48,6 +48,7 @@ function nextQuestionId(state = initialNextQuestionId, action: VoteReducerAction
         case ActionTypes.VOTE_SUCCESS:
             return action.payload.entities.votes[action.payload.result].questions[0];
         case ActionTypes.SET_NEXT_QUESTION_ID:
+        case ActionTypes.RESET_QUIZ:
             return action.nextQuestionId;
         default:
             return state;
@@ -62,12 +63,20 @@ function answers(state = initialAnswers, action: VoteReducerActions): Array<User
         }]);
     }
 
+    if (action.type === ActionTypes.RESET_QUIZ) {
+        return [];
+    }
+
     return state;
 }
 
 function isRightAnswersCount(state = initialIsRightAnswersCount, action: VoteReducerActions): number {
     if (action.type === ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT) {
         return action.count;
+    }
+
+    if (action.type === ActionTypes.RESET_QUIZ) {
+        return 0;
     }
 
     return state;
