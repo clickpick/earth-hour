@@ -14,6 +14,10 @@ const Transition: FC<TransitionProps> = ({ in: inProp, mounted, timeout, mountOn
     const [show, setShow] = useState<boolean>(!!inProp);
 
     const contentView = useCallback((children) => {
+        if (!children) {
+            return null;
+        }
+
         const className = cn(children.props.className, {
             'hidden': mountOnEnter && !show,
             'fade-enter': mounted,
