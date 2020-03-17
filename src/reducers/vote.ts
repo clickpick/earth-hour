@@ -1,18 +1,19 @@
 import {
     ActionTypes,
     QuestionIds, Questions, UserAnswer, VoteState,
-    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId, AttachAnswer
+    VoteLoad, VoteSuccess, VoteFailure, SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount
 } from '../types/store';
 import { AppState } from './index';
 import isPending, { initialPending } from './pending';
 import isError, { initialError } from './error';
 
-type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId | AttachAnswer;
+type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | SetNextQuestionId | AttachAnswer | SetIsRightAnswersCount;
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
 const initialNextQuestionId: number | null = 0;
 const initialAnswers: Array<UserAnswer> = [];
+const initialIsRightAnswersCount: number = 0;
 
 export const voteInitialState: VoteState = {
     pending: initialPending,
@@ -20,7 +21,8 @@ export const voteInitialState: VoteState = {
     questionIds: initialQuesitionIds,
     questions: initialQuesitions,
     nextQuestionId: initialNextQuestionId,
-    answers: initialAnswers
+    answers: initialAnswers,
+    isRightAnswersCount: initialIsRightAnswersCount
 };
 
 function questionIds(state = initialQuesitionIds, action: VoteReducerActions): QuestionIds {
@@ -63,6 +65,14 @@ function answers(state = initialAnswers, action: VoteReducerActions): Array<User
     return state;
 }
 
+function isRightAnswersCount(state = initialIsRightAnswersCount, action: VoteReducerActions): number {
+    if (action.type === ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT) {
+        return action.count;
+    }
+
+    return state;
+}
+
 export default function vote(state = voteInitialState, action: VoteReducerActions): VoteState {
     return {
         pending: isPending<VoteReducerActions>(state.pending, action, [ActionTypes.VOTE_REQUEST, ActionTypes.VOTE_SUCCESS, ActionTypes.VOTE_FAILURE]),
@@ -70,7 +80,8 @@ export default function vote(state = voteInitialState, action: VoteReducerAction
         questionIds: questionIds(state.questionIds, action),
         questions: questions(state.questions, action),
         nextQuestionId: nextQuestionId(state.nextQuestionId, action),
-        answers: answers(state.answers, action)
+        answers: answers(state.answers, action),
+        isRightAnswersCount: isRightAnswersCount(state.isRightAnswersCount, action)
     };
 }
 

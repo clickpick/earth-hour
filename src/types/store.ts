@@ -10,7 +10,8 @@ export enum ActionTypes {
     VOTE_FAILURE = 'VOTE_FAILURE',
 
     SET_NEXT_QUESTION_ID = 'SET_NEXT_QUESTION_ID',
-    ATTACH_ANSWER = 'ATTACH_ANSWER'
+    ATTACH_ANSWER = 'ATTACH_ANSWER',
+    SET_IS_RIGHT_ANSWERS_COUNT = 'SET_IS_RIGHT_ANSWERS_COUNT'
 }
 
 interface EntitiesObject<T> { [index: string]: T }
@@ -73,6 +74,7 @@ export interface VoteState extends DataState {
     readonly questions: Questions,
     readonly nextQuestionId: number | null,
     readonly answers: Array<UserAnswer>
+    readonly isRightAnswersCount: number,
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -136,4 +138,9 @@ export interface AttachAnswer {
     type: ActionTypes.ATTACH_ANSWER,
     questionId: number,
     answerId: number
+}
+
+export interface SetIsRightAnswersCount {
+    type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
+    count: number
 }

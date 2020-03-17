@@ -31,3 +31,8 @@ export const attachAnswer = (questionId: number, answerId: number) => ({
     questionId,
     answerId
 });
+
+export const setIsRightAnswersCount = (count: number) => ({
+    type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
+    count
+});
