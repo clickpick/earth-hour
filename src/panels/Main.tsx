@@ -16,15 +16,20 @@ import Group from '../components/Group';
 import Stories from '../components/Stories';
 import About from '../components/About';
 
-import posterQuiz from '../images/poster-quiz.png';
-import posterQuiz2 from '../images/poster-quiz-2.jpg';
+import posterQuiz from '../images/poster-quiz-mini.png';
+import posterQuiz2 from '../images/poster-quiz-2-mini.png';
 
 export interface MainProps extends PanelPrimary { }
 
 const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
-    const { questionIds, answers } = useVote();
+    const { questionIds, answers, finish } = useVote();
 
     const hasQuestions = useMemo(() => !!questionIds, [questionIds]);
+
+    const quizMessage = useMemo(() => (finish)
+        ? 'Квиз выполнен'
+        : `Квиз (${answers.length} из ${questionIds?.length} выполнено)`,
+        [finish, answers, questionIds]);
 
     return (
         <Panel id={id} separator={false}>
@@ -47,7 +52,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                     <Card
                         className="margin-pink--bottom"
                         poster={posterQuiz}
-                        hint={`Квиз (${answers.length} из ${questionIds?.length} выполнено)`}
+                        hint={quizMessage}
                         data-to={HomePanels.VOTE}
                         onClick={goForward}>
                         Всё об акции «Час Земли» за 5 минут
