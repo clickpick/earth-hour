@@ -1,5 +1,5 @@
 import bridge from '@vkontakte/vk-bridge';
-import { Links } from '../config';
+import { Links, WWF_GROUP_ID } from '../config';
 
 export const share = (link: string) => bridge.send('VKWebAppShare', { link });
 export const shareApp = () => share(Links.APP_LINK);
@@ -25,3 +25,6 @@ export const showStoryBox = (stickerUrl: string) =>
 
 export const tapticNotification = (type: 'success' | 'warning' | 'error') =>
     bridge.send('VKWebAppTapticNotificationOccurred', { type });
+
+export const allowMessages = () =>
+    bridge.send('VKWebAppAllowMessagesFromGroup', { group_id: WWF_GROUP_ID });
