@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, memo } from 'react';
 import cn from 'classnames';
 
+import { allowMessages } from '../../helpers/vk';
 import { Links } from '../../config';
 
 import Group from '../Group';
@@ -9,6 +10,7 @@ import Footnote from '../Footnote';
 import Button from '../Button';
 
 import { ReactComponent as Prize } from '../../svg/prize.svg';
+import { ReactComponent as IconMessages } from '../../svg/messages.svg';
 import { ReactComponent as IconVK } from '../../svg/vk.svg';
 import { ReactComponent as IconEarth } from '../../svg/earth.svg';
 
@@ -21,10 +23,19 @@ const WWFPrize: FC<WWFPrizeProps> = ({ className, ...restProps }: WWFPrizeProps)
             <Headline>Подарок от WWF</Headline>
             <Footnote className="margin-purple--bottom padding-blue--rl Ta(c) color-opacity--secondary">
                 Чтобы забрать подарок, нужно быть
-                подписанным на группу WWF
-                и пройти тест на сайте акции
+                подписанным на сообщения группы WWF России
+                и пройти второй квиз, который будет доступен 28 марта
             </Footnote>
-            <Group>
+            <Group start>
+                <Button
+                    className="margin-purple--right"
+                    shape="circle"
+                    icon={<IconMessages />}
+                    onClick={allowMessages}>
+                    Подписаться<br />
+                    на сообщения<br />
+                    WWF России
+                </Button>
                 <Button
                     className="margin-purple--right"
                     shape="circle"
