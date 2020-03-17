@@ -10,6 +10,10 @@
     display: inline-block;
 }
 
+.Ta\(c\) {
+    text-align: center;
+}
+
 .color-opacity--secondary {
     opacity: 0.6;
 }
