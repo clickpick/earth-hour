@@ -3,7 +3,7 @@ import React, { FC, useRef, useCallback, useMemo, useEffect } from 'react';
 import { PanelSecondary } from '../types/props';
 import useVote from '../hooks/use-vote';
 import { resultProps } from '../config';
-import { shareApp } from '../helpers/vk';
+import { shareApp, showStoryBox } from '../helpers/vk';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack } from '@vkontakte/vkui';
 import Question from '../components/Question';
@@ -23,7 +23,7 @@ export interface VoteProps extends PanelSecondary { }
 
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const {
-        questionIds, questions, answers,
+        questionIds, questions, answers, storyLink,
         isRightAnswersCount, nextQuestionId, finish,
         setNextQuestionId, attachAnswer, setIsRightAnswersCount,
         sendAnswers, resetQuiz
@@ -49,6 +49,8 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const incrementIsRight = useCallback((count: number) => {
         isRight.current += count;
     }, []);
+
+    const shareStory = useCallback(() => showStoryBox(storyLink as string), [storyLink]);
 
     const questionView = useCallback((id, index) => {
         if (nextQuestionId !== id) {
@@ -96,7 +98,8 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                         ? <Button
                             className="margin-purple--right"
                             shape="circle"
-                            icon={<IconnUnion />}>
+                            icon={<IconnUnion />}
+                            onClick={shareStory}>
                             Поделиться<br />в сторис
                         </Button>
                         : <Button
@@ -117,7 +120,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                 {(showPrize) && <WWFPrize className="margin-pink--top" />}
             </Transition>
         );
-    }, [finish, answers, resetQuiz, goBack]);
+    }, [finish, answers, shareStory, resetQuiz, goBack]);
 
     const bodyView = useMemo(() => (!questionIds)
         ? <h1>А где вопросы?</h1>
