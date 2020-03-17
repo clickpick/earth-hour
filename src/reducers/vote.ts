@@ -12,6 +12,7 @@ type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | UserAuthSuccess
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
+const initialStoryLink: string | null = null;
 const initialNextQuestionId: number | null = 0;
 const initialAnswers: Array<UserAnswer> = [];
 const initialIsRightAnswersCount: number = 0;
@@ -22,6 +23,7 @@ export const voteInitialState: VoteState = {
     error: initialError,
     questionIds: initialQuesitionIds,
     questions: initialQuesitions,
+    storyLink: initialStoryLink,
     nextQuestionId: initialNextQuestionId,
     answers: initialAnswers,
     isRightAnswersCount: initialIsRightAnswersCount,
@@ -44,6 +46,14 @@ function questions(state = initialQuesitions, action: VoteReducerActions): Quest
         default:
             return state;
     }
+}
+
+function storyLink(state = initialStoryLink, action: VoteReducerActions): string | null {
+    if (action.type === ActionTypes.VOTE_SUCCESS) {
+        return action.payload.entities.votes[action.payload.result].storyLink;
+    }
+
+    return state;
 }
 
 function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number | null {
@@ -115,6 +125,7 @@ export default function vote(state = voteInitialState, action: VoteReducerAction
         error: isError<VoteReducerActions>(state.error, action, ActionTypes.VOTE_FAILURE),
         questionIds: questionIds(state.questionIds, action),
         questions: questions(state.questions, action),
+        storyLink: storyLink(state.storyLink, action),
         nextQuestionId: nextQuestionId(state.nextQuestionId, action),
         answers: answers(state.answers, action),
         isRightAnswersCount: isRightAnswersCount(state.isRightAnswersCount, action),

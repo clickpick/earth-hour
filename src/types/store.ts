@@ -77,6 +77,7 @@ export interface UserAnswer {
 export interface VoteState extends DataState {
     readonly questionIds: QuestionIds,
     readonly questions: Questions,
+    readonly storyLink: string | null,
     readonly nextQuestionId: number | null,
     readonly answers: Array<UserAnswer>
     readonly isRightAnswersCount: number,
@@ -122,7 +123,8 @@ export interface VoteSuccess {
             votes: {
                 [index: string]: {
                     id: string,
-                    questions: IdsArray
+                    questions: IdsArray,
+                    storyLink: string
                 }
             }
         },
