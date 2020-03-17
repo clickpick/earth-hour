@@ -8,11 +8,13 @@ import * as VoteActions from '../actions/vote';
 type GetQuestions = () => void;
 type SetNextQuestionId = () => void;
 type AttachAnswer = (questionId: number, answerId: number) => void;
+type SetIsRightAnswersCount = (count: number) => void;
 
 export interface UseVote extends VoteState {
     getQuestions: GetQuestions,
     setNextQuestionId: SetNextQuestionId,
-    attachAnswer: AttachAnswer
+    attachAnswer: AttachAnswer,
+    setIsRightAnswersCount: SetIsRightAnswersCount
 }
 
 export default function useVote(): UseVote {
@@ -23,6 +25,8 @@ export default function useVote(): UseVote {
     const setNextQuestionId = useCallback<SetNextQuestionId>(() => dispatch(VoteActions.setNextQuestionId()), [dispatch]);
     const attachAnswer = useCallback<AttachAnswer>((questionId, answerId) =>
         dispatch(VoteActions.attachAnswer(questionId, answerId)), [dispatch]);
+    const setIsRightAnswersCount = useCallback<SetIsRightAnswersCount>((count) =>
+        dispatch(VoteActions.setIsRightAnswersCount(count)), [dispatch]);
 
-    return { ...vote, getQuestions, setNextQuestionId, attachAnswer };
+    return { ...vote, getQuestions, setNextQuestionId, attachAnswer, setIsRightAnswersCount };
 }
