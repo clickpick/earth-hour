@@ -1,5 +1,5 @@
 import { CALL_API, Methods } from '../middleware/api'
-import { ActionTypes } from '../types/store';
+import { ActionTypes, UserAnswer } from '../types/store';
 import { vote } from '../schema';
 
 export const fetchQuetions = () => ({
@@ -35,6 +35,16 @@ export const attachAnswer = (questionId: number, answerId: number) => ({
 export const setIsRightAnswersCount = (count: number) => ({
     type: ActionTypes.SET_IS_RIGHT_ANSWERS_COUNT,
     count
+});
+
+export const sendAnswers = (answers: Array<UserAnswer>) => ({
+    [CALL_API]: {
+        types: ['', '', ''],
+        endpoint: '/votes/1/verify',
+        method: Methods.POST,
+        schema: [],
+        data: { answers }
+    }
 });
 
 export const resetQuiz = () => (dispath: any, getState: any) => {
