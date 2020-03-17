@@ -13,14 +13,21 @@ import WWFPrize from '../components/WWFPrize';
 
 import { ReactComponent as IconReply } from '../svg/reply.svg';
 import { ReactComponent as IconAgain } from '../svg/again.svg';
+import { ReactComponent as IconnUnion } from '../svg/union.svg';
 import { ReactComponent as IconHome } from '../svg/home.svg';
 
 export interface VoteProps extends PanelSecondary { }
 
+const resultProps = {
+    bad: { title: '123', message: '987' },
+    good: { title: '456', message: '654' },
+    best: { title: '789', message: '321' }
+};
+
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const {
         questionIds, questions, answers,
-        isRightAnswersCount, nextQuestionId,
+        isRightAnswersCount, nextQuestionId, finish,
         setNextQuestionId, attachAnswer, setIsRightAnswersCount,
         sendAnswers, resetQuiz
     } = useVote();
@@ -28,15 +35,17 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const isRight = useRef<number>(isRightAnswersCount);
 
     useEffect(() => () => {
-        setNextQuestionId();
-        setIsRightAnswersCount(isRight.current);
-    }, [setNextQuestionId, setIsRightAnswersCount]);
+        if (!finish) {
+            setNextQuestionId();
+            setIsRightAnswersCount(isRight.current);
+        }
+    }, [finish, setNextQuestionId, setIsRightAnswersCount]);
 
     useEffect(() => {
-        if (answers.length === questionIds?.length) {
-            sendAnswers(answers);
+        if (!finish && answers.length === questionIds?.length && nextQuestionId === null) {
+            setTimeout(() => { sendAnswers(answers); }, 1500);
         }
-    }, [answers, questionIds, sendAnswers]);
+    }, [finish, answers, questionIds, nextQuestionId, sendAnswers]);
 
     const questionsCount = useMemo(() => (Array.isArray(questionIds) && questionIds.length) || 0, [questionIds]);
 
@@ -63,32 +72,21 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     }, [nextQuestionId, questions, questionsCount, incrementIsRight, setNextQuestionId, attachAnswer]);
 
     const resultView = useMemo(() => {
-        const result = (isRight.current / answers.length) * 100;
-        let mood: 'best' | 'good' | 'bad' | 'lock' = 'bad';
-        let title = 'Плохо';
-        let message = '123';
-        let showPrize = false;
-
-        if (result >= 60 && result <= 80) {
-            mood = 'good';
-            title = 'Норм';
-            message = '456';
-        }
-
-        if (result === 100) {
-            mood = 'best';
-            title = 'Норм';
-            message = '456';
-            showPrize = true;
-        }
+        const result = (isRight.current / answers.length) * 100 || 0;
+        const showPrize = finish || result === 100;
+        let mood: 'best' | 'good' | 'bad' | 'lock' =
+            (showPrize)
+                ? 'best'
+                : (result >= 60 && result <= 80)
+                    ? 'good'
+                    : 'bad';
 
         return (
             <Transition in={true} timeout={100}>
                 <Planet
                     className="margin-pink--bottom padding-blue--rl"
                     mood={mood}
-                    title={title}
-                    message={message} />
+                    {...resultProps[mood]} />
                 <Group jcCenter>
                     <Button
                         className="margin-purple--right"
@@ -97,13 +95,21 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                         onClick={undefined}>
                         Поделиться<br />приложением
                     </Button>
-                    <Button
-                        className="margin-purple--right"
-                        shape="circle"
-                        icon={<IconAgain />}
-                        onClick={resetQuiz}>
-                        Повторить квиз<br />заново
-                    </Button>
+                    {(showPrize)
+                        ? <Button
+                            className="margin-purple--right"
+                            shape="circle"
+                            icon={<IconnUnion />}>
+                            Поделиться<br />в сторис
+                        </Button>
+                        : <Button
+                            className="margin-purple--right"
+                            shape="circle"
+                            icon={<IconAgain />}
+                            onClick={resetQuiz}>
+                            Повторить квиз<br />заново
+                        </Button>}
+
                     <Button
                         shape="circle"
                         icon={<IconHome />}
@@ -114,7 +120,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                 {(showPrize) && <WWFPrize className="margin-pink--top" />}
             </Transition>
         );
-    }, [answers, resetQuiz, goBack]);
+    }, [finish, answers, resetQuiz, goBack]);
 
     const bodyView = useMemo(() => (!questionIds)
         ? <h1>А где вопросы?</h1>
