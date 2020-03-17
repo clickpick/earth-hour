@@ -6,6 +6,10 @@
     flex-direction: column;
 }
 
+.Group--jc-center {
+    justify-content: center;
+}
+
 .Group--center {
     align-items: center;
 }
