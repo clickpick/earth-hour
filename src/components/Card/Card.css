@@ -14,11 +14,18 @@ a.Card {
 .Card--large {
     position: relative;
 
-    height: 414px;
+    width: 100%;
+    min-height: 345px;
 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.Card--large::before {
+    display: block;
+    content: '';
+    margin-top: 120%;
 }
 
 .Card--large .Card__content {
