@@ -2,6 +2,7 @@ import React, { FC, useRef, useCallback, useMemo, useEffect } from 'react';
 
 import { PanelSecondary } from '../types/props';
 import useVote from '../hooks/use-vote';
+import { resultProps } from '../config';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack } from '@vkontakte/vkui';
 import Question from '../components/Question';
@@ -18,11 +19,6 @@ import { ReactComponent as IconHome } from '../svg/home.svg';
 
 export interface VoteProps extends PanelSecondary { }
 
-const resultProps = {
-    bad: { title: '123', message: '987' },
-    good: { title: '456', message: '654' },
-    best: { title: '789', message: '321' }
-};
 
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const {
