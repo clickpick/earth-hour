@@ -2,6 +2,7 @@ import { Story } from './types/props';
 import { timestamp } from './helpers/date';
 
 import posterQuiz from './images/poster-quiz.png';
+import posterQuiz2 from './images/poster-quiz-2-mini.png';
 
 export const stories: Array<Story> = [{
     id: 'story-1',
@@ -34,7 +35,7 @@ export const stories: Array<Story> = [{
 }, {
     id: 'story-2',
     name: 'Подарок от WWF',
-    photo: posterQuiz,
+    photo: posterQuiz2,
     seen: false,
     gradient: 'blue-green',
     lastUpdated: timestamp(),
