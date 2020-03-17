@@ -1,6 +1,6 @@
-import React, { FC, HTMLAttributes, useCallback, memo } from 'react';
+import React, { FC, HTMLAttributes, memo } from 'react';
 
-import bridge from '@vkontakte/vk-bridge';
+import { shareApp } from '../../helpers/vk';
 import { Links } from '../../config';
 
 import Headline from '../../components/Headline';
@@ -16,10 +16,6 @@ import { ReactComponent as IconEarth } from '../../svg/earth.svg';
 export interface AboutProps extends HTMLAttributes<HTMLDivElement> { }
 
 const About: FC<AboutProps> = (props: AboutProps) => {
-    const handleShareApp = useCallback(() => {
-        bridge.send('VKWebAppShare', { link: Links.APP_LINK });
-    }, []);
-
     return (
         <Group vertical center {...props}>
             <WWFLogo className="margin-aqua--bottom" />
@@ -30,7 +26,7 @@ const About: FC<AboutProps> = (props: AboutProps) => {
                     className="margin-purple--right"
                     shape="circle"
                     icon={<IconReply />}
-                    onClick={handleShareApp}>
+                    onClick={shareApp}>
                     Поделиться<br />приложением
                 </Button>
                 <Button
