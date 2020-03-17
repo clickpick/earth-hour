@@ -1,9 +1,9 @@
-import React, { FC, useRef, useState, useCallback, useMemo, useEffect, memo } from 'react';
+import React, { FC, useRef, useState, useCallback, useMemo, memo } from 'react';
 import cn from 'classnames';
 
 import { Question as IQuestion, Answer as IAnswer } from '../../types/store';
 
-import bridge from '@vkontakte/vk-bridge';
+import { share, showStoryBox, tapticNotification } from '../../helpers/vk';
 
 import Caption from '../Caption';
 import Title from '../Title';
@@ -21,11 +21,17 @@ export interface QuestionProps extends IQuestion {
     className?: string,
     currentQuestionNumber: number,
     questionsCount: number,
+    triggerAnswer(isRight: number): void,
     goNext(): void,
     attachAnswer(questionId: number, answerId: number): void
 }
 
-const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, questionsCount, question, storyLink, comment, answers, goNext, attachAnswer }: QuestionProps) => {
+const Question: FC<QuestionProps> = ({
+    className, id,
+    currentQuestionNumber, questionsCount,
+    question, storyLink, comment, answers,
+    triggerAnswer, goNext, attachAnswer
+}: QuestionProps) => {
     const classNames = useMemo(() => cn(className, 'Question'), [className]);
 
     const [showQuestion, setShowQuestion] = useState<boolean>(true);
@@ -43,41 +49,16 @@ const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, que
         const answerId = Number(e.target.dataset.answerId);
 
         isRight.current = hasRight === '1';
-        bridge.send('VKWebAppTapticNotificationOccurred', { type: (isRight.current) ? 'success' : 'error' });
+        triggerAnswer(Number(isRight.current));
+        tapticNotification((isRight.current) ? 'success' : 'error');
         attachAnswer(questionId, answerId);
         setShowResult(true);
-    }, [attachAnswer]);
+    }, [attachAnswer, triggerAnswer]);
 
-    const handleShareFriends = useCallback((e: any) => {
-        bridge.send('VKWebAppShare', { link: `https://wwf-earth-hour.ezavalishin.ru/share/${e.currentTarget.dataset.questionId}` });
-    }, []);
+    const handleShareFriends = useCallback((e: any) =>
+        share(`https://wwf-earth-hour.ezavalishin.ru/share/${e.currentTarget.dataset.questionId}`), []);
 
-    const handleShareStory = useCallback(() => {
-        bridge.send('VKWebAppShowStoryBox', {
-            background_type: 'none',
-            stickers: [
-                {
-                    sticker_type: 'renderable',
-                    sticker: {
-                        content_type: 'image',
-                        url: storyLink,
-                        transform: {
-                            translation_y: 0.08,
-                            relation_width: 0.6,
-                            gravity: 'right_top'
-                        },
-                    }
-                }
-            ]
-        });
-    }, [storyLink]);
-
-    useEffect(() => {
-        setShowResult(false);
-        setShowQuestion(true);
-        setNext(false);
-        isRight.current = false;
-    }, [question]);
+    const handleShareStory = useCallback(() => showStoryBox(storyLink), [storyLink]);
 
     const hintView = useMemo(() =>
         <Caption className="color-opacity--secondary">Вопрос {currentQuestionNumber} из {questionsCount}</Caption>,
@@ -135,21 +116,20 @@ const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, que
                     Поделиться<br />c друзьями
                 </Button>
                 <Button
+                    className="margin-purple--right"
                     shape="circle"
                     icon={<IconUnion />}
                     onClick={handleShareStory}
                     disabled={next}>
                     Поделиться<br />в сторис
                 </Button>
-                {(hasNextQuestion) &&
-                    <Button
-                        className="margin-purple--left"
-                        shape="circle"
-                        icon={<IconNext />}
-                        onClick={hideResult}
-                        disabled={next}>
-                        Дальше
-                    </Button>}
+                <Button
+                    shape="circle"
+                    icon={<IconNext />}
+                    onClick={hideResult}
+                    disabled={next}>
+                    {(hasNextQuestion) ? 'Дальше' : <>Узнать<br />результат</>}
+                </Button>
             </Group>
         );
     }, [id, currentQuestionNumber, questionsCount, next, hideResult, handleShareFriends, handleShareStory]);
@@ -164,7 +144,7 @@ const Question: FC<QuestionProps> = ({ className, id, currentQuestionNumber, que
             const handleAnimationEnd = (next) ? goNext : undefined;
 
             return (
-                <div className={classNames} onAnimationEnd={handleAnimationEnd}>
+                <div className={classNames} data-is-right={Number(isRight.current)} onAnimationEnd={handleAnimationEnd}>
                     <Group className="padding-blue" vertical center>
                         <Card
                             className="margin-aqua--bottom"
