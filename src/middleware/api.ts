@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { camelizeKeys } from 'humps';
+import { camelizeKeys, decamelizeKeys } from 'humps';
 import { normalize, Schema } from 'normalizr';
 
 import { parseQueryString } from '../helpers/location';
@@ -48,7 +48,7 @@ function callApi(endpoint: string, method: Methods, schema: Schema<any>, data?: 
     return instance({
         url: endpoint,
         method,
-        data
+        data: (data) ? decamelizeKeys(data) : undefined
     }).then((response: Response) => {
         const data = parseResponseData(response);
         const camelizedData = camelizeKeys(data);
