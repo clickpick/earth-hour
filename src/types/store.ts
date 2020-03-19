@@ -63,6 +63,7 @@ export interface Question {
     readonly question: string,
     readonly comment: string,
     readonly storyLink: string,
+    readonly landLink: string,
     readonly image: {
         jpg: {
             x1: string,

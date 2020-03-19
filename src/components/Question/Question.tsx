@@ -28,7 +28,7 @@ export interface QuestionProps extends IQuestion {
 const Question: FC<QuestionProps> = ({
     className, id,
     currentQuestionNumber, questionsCount,
-    question, storyLink, comment, answers, image,
+    question, landLink, storyLink, comment, answers, image,
     triggerAnswer, goNext, attachAnswer
 }: QuestionProps) => {
     const classNames = useMemo(() => cn(className, 'Question'), [className]);
@@ -54,8 +54,8 @@ const Question: FC<QuestionProps> = ({
         setShowResult(true);
     }, [attachAnswer, triggerAnswer]);
 
-    const handleShareFriends = useCallback((e: any) =>
-        share(`https://wwf-earth-hour.ezavalishin.ru/share/${e.currentTarget.dataset.questionId}`), []);
+    const handleShareFriends = useCallback(() =>
+        share(landLink), [landLink]);
 
     const handleShareStory = useCallback(() => showStoryBox(storyLink), [storyLink]);
 
@@ -108,7 +108,6 @@ const Question: FC<QuestionProps> = ({
                     className="margin-purple--right"
                     shape="circle"
                     icon={<IconReply />}
-                    data-question-id={id}
                     onClick={handleShareFriends}
                     disabled={next}>
                     Поделиться<br />c друзьями
@@ -130,7 +129,7 @@ const Question: FC<QuestionProps> = ({
                 </Button>
             </Group>
         );
-    }, [id, currentQuestionNumber, questionsCount, next, hideResult, handleShareFriends, handleShareStory]);
+    }, [currentQuestionNumber, questionsCount, next, hideResult, handleShareFriends, handleShareStory]);
 
     const resultView = useMemo(() => {
         if (showResult) {
