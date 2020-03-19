@@ -1,0 +1,14 @@
+.Vote__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-size: cover;
+    filter: blur(50px);
+
+    transition: all 500ms ease-in;
+}

@@ -1,5 +1,10 @@
 import React, { FC, useRef, useCallback, useMemo, useEffect } from 'react';
 
+import './Vote.css';
+
+// @ts-ignore
+import { checkWebPSupport } from 'supports-webp-sync';
+
 import { PanelSecondary } from '../types/props';
 import useVote from '../hooks/use-vote';
 import { resultProps } from '../config';
@@ -20,6 +25,7 @@ import { ReactComponent as IconHome } from '../svg/home.svg';
 
 export interface VoteProps extends PanelSecondary { }
 
+const supportWebp: boolean = checkWebPSupport();
 
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const {
@@ -122,6 +128,25 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
         );
     }, [finish, answers, shareStory, resetQuiz, goBack]);
 
+    const maskView = useMemo(() => {
+        if (nextQuestionId === null) {
+            return null;
+        }
+
+        const { image } = questions[nextQuestionId];
+
+        return (
+            <div
+                className="Vote__mask"
+                style={{
+                    backgroundImage: `
+                        linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+                        url(${(supportWebp) ? image.webp.x1 : image.jpg.x1})
+                    `,
+                }} />
+        );
+    }, [questions, nextQuestionId])
+
     const bodyView = useMemo(() => (!questionIds)
         ? <h1>А где вопросы?</h1>
         : (nextQuestionId !== null)
@@ -135,6 +160,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
                 left={<PanelHeaderBack onClick={goBack} />}
                 separator={false}
                 children="Час Земли" />
+            {maskView}
             {bodyView}
         </Panel>
     );
