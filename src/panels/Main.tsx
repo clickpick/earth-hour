@@ -63,7 +63,7 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                         hint="Квиз будет доступен 28 марта"
                         data-to={HomePanels.VOTE_2}
                         onClick={goForward}>
-                        Узнай, кто ты для планеты, и получи подарок от WWF
+                        Узнай, кто ты для планеты, и получи подарок от VK и WWF
                     </Card>
                     <About />
                 </Group>
