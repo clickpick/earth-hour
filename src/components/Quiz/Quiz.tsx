@@ -50,7 +50,15 @@ const Quiz: FC<QuizProps> = ({
         isRight.current += count;
     }, []);
 
+    const reset = useCallback(() => {
+        isRight.current = 0;
+        resetQuiz();
+    }, [resetQuiz]);
+
     useEffect(() => () => {
+        console.log(1);
+        console.log(isRight.current);
+
         if (!finish) {
             setNextQuestionId();
             setIsRightAnswersCount(isRight.current);
@@ -130,7 +138,7 @@ const Quiz: FC<QuizProps> = ({
                             className="margin-purple--right"
                             shape="circle"
                             icon={<IconAgain />}
-                            onClick={resetQuiz}>
+                            onClick={reset}>
                             Повторить квиз<br />заново
                         </Button>}
 
@@ -144,7 +152,7 @@ const Quiz: FC<QuizProps> = ({
                 {(showPrize) && <WWFPrize className="margin-pink--top" />}
             </Transition>
         );
-    }, [finish, answersCount, shareStory, resetQuiz, exit]);
+    }, [finish, answersCount, shareStory, reset, exit]);
 
     const bodyView = useMemo(() => (nextQuestionId !== null)
         ? questionIds.map(questionView)
