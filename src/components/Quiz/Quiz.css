@@ -1,4 +1,4 @@
-.Vote__mask {
+.Quiz__mask {
     position: absolute;
     top: 0;
     left: 0;
@@ -10,5 +10,5 @@
     background-size: cover;
     filter: blur(50px);
 
-    transition: all 500ms ease-in;
+    transition: all 15000ms ease-in;
 }
