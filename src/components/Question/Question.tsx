@@ -12,7 +12,6 @@ import Group from '../Group';
 import Card from '../Card';
 import Button from '../Button';
 
-import posterQuiz from '../../images/poster-quiz-mini.png';
 import { ReactComponent as IconReply } from '../../svg/reply.svg';
 import { ReactComponent as IconUnion } from '../../svg/union.svg';
 import { ReactComponent as IconNext } from '../../svg/next.svg';
@@ -29,7 +28,7 @@ export interface QuestionProps extends IQuestion {
 const Question: FC<QuestionProps> = ({
     className, id,
     currentQuestionNumber, questionsCount,
-    question, storyLink, comment, answers,
+    question, storyLink, comment, answers, image,
     triggerAnswer, goNext, attachAnswer
 }: QuestionProps) => {
     const classNames = useMemo(() => cn(className, 'Question'), [className]);
@@ -150,7 +149,7 @@ const Question: FC<QuestionProps> = ({
                             size="large"
                             children={title}
                             hint={comment}
-                            poster={posterQuiz} />
+                            poster={{ webp: image.webp.x2, jpg: image.jpg.x2 }} />
                         {hintView}
                         {resultActionsView}
                     </Group>
@@ -159,7 +158,7 @@ const Question: FC<QuestionProps> = ({
         }
 
         return null;
-    }, [showResult, comment, next, hintView, resultActionsView, goNext]);
+    }, [showResult, comment, next, hintView, resultActionsView, goNext, image]);
 
     return (
         <div className={classNames}>
