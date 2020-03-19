@@ -7,6 +7,9 @@ import cn from 'classnames';
 
 import { HasChildren } from '../../types/props';
 
+// @ts-ignore
+import { checkWebPSupport } from 'supports-webp-sync';
+
 import Title from '../Title';
 import Caption from '../Caption';
 import Linkify from 'react-linkify';
@@ -14,10 +17,12 @@ import Linkify from 'react-linkify';
 export interface CardProps extends HTMLAttributes<HTMLElement>, HasChildren {
     size?: 'medium' | 'large',
     hint?: string,
-    poster?: string,
+    poster?: string | { webp: string, jpg: string },
     disabled?: boolean,
     href?: string
 }
+
+const supportWebp: boolean = checkWebPSupport();
 
 const Card: FC<CardProps> = ({ className, href, size, poster, children, hint, disabled, style, onClick, ...restProps }: CardProps) => {
     const classNames = useMemo(() =>
@@ -27,7 +32,15 @@ const Card: FC<CardProps> = ({ className, href, size, poster, children, hint, di
         [className, size, disabled]);
 
     const styles = useMemo(() => (size === 'large' && !!poster)
-        ? { ...style, backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${poster})` }
+        ? {
+            ...style, backgroundImage: `
+            linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
+            url(${
+                (typeof poster === 'string')
+                    ? poster
+                    : (supportWebp) ? poster.webp : poster.jpg
+                })
+        ` }
         : style,
         [size, style, poster]);
 
