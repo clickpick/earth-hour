@@ -10072,6 +10072,11 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+supports-webp-sync@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/supports-webp-sync/-/supports-webp-sync-1.0.0.tgz#22394e7e8e12b2e6121da614a8692654fdbb9871"
+  integrity sha512-o10tVwpMhoeUJbGRSi19fMMpfjCQK/yTssfFDKN20XTmOOEawKNldnb3HzJt9TnT97dkCbbSarsT7FZ52jRQkQ==
+
 svg-baker-runtime@^1.4.2:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/svg-baker-runtime/-/svg-baker-runtime-1.4.3.tgz#8ec035daf3af4abe7e788120868ebbf84a34468f"

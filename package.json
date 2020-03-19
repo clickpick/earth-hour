@@ -29,6 +29,7 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "supports-webp-sync": "^1.0.0",
     "zuck.js": "^1.5.6"
   },
   "devDependencies": {
