@@ -63,6 +63,18 @@ export interface Question {
     readonly question: string,
     readonly comment: string,
     readonly storyLink: string,
+    readonly image: {
+        jpg: {
+            x1: string,
+            x2: string,
+            x3: string
+        },
+        webp: {
+            x1: string,
+            x2: string,
+            x3: string
+        }
+    },
     readonly answers: Array<Answer>
 }
 
