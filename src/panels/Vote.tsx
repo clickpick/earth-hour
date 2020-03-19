@@ -156,10 +156,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
 
     return (
         <Panel id={id} separator={false}>
-            <PanelHeaderSimple
-                left={<PanelHeaderBack onClick={goBack} />}
-                separator={false}
-                children="Час Земли" />
+            <PanelHeaderSimple left={<PanelHeaderBack onClick={goBack} />} separator={false} />
             {maskView}
             {bodyView}
         </Panel>
