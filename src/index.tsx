@@ -14,7 +14,7 @@ bridge.send(
     'VKWebAppSetViewSettings',
     {
         status_bar_style: 'light',
-        action_bar_color: '#FFF',
+        action_bar_color: '#000',
         navigation_bar_color: '#000'
     }
 );
