@@ -1,3 +1,10 @@
+.Quiz {
+    position: relative;
+
+    width: 100vw;
+    height: 100%;
+}
+
 .Quiz__mask {
     position: absolute;
     top: 0;

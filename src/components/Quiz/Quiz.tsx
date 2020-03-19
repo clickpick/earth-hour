@@ -152,10 +152,10 @@ const Quiz: FC<QuizProps> = ({
         [nextQuestionId, questionIds, questionView, resultView]);
 
     return (
-        <>
+        <div className="Quiz">
             {maskView}
             {bodyView}
-        </>
+        </div>
     );
 };
 
