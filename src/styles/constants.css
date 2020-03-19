@@ -10,7 +10,7 @@
     --font-weight-medium: 500;
 
     --background_content: #000;
-    --header_background: #000;
+    --header_background: transparent;
     --header_text: #FFF;
     --header_tint: #FFF;
 
