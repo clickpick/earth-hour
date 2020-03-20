@@ -22,6 +22,18 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
         }
     }, [finish, answers, questionIds, nextQuestionId, sendAnswers]);
 
+    useEffect(() => {
+        function handleTouchMove(e: TouchEvent) {
+            e.preventDefault();
+        }
+
+        window.addEventListener('touchmove', handleTouchMove, false);
+
+        return () => {
+            window.removeEventListener('touchmove', handleTouchMove);
+        }
+    }, []);
+
     const bodyView = useMemo(() => (questionIds === null)
         ? <h1>А где вопросы?</h1>
         : <Quiz
