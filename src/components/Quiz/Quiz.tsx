@@ -56,9 +56,6 @@ const Quiz: FC<QuizProps> = ({
     }, [resetQuiz]);
 
     useEffect(() => () => {
-        console.log(1);
-        console.log(isRight.current);
-
         if (!finish) {
             setNextQuestionId();
             setIsRightAnswersCount(isRight.current);
