@@ -28,7 +28,7 @@ export default function usePanels(initialActivePanel: string): UsePanels {
     }, [initialActivePanel]);
 
     const goBack = useCallback<GoBack>(() => {
-        setHistory(history => [...history].slice(-1, 1));
+        setHistory(history => [...history].slice(0, history.length - 1));
         window.history.back();
     }, []);
 
