@@ -1,30 +1,10 @@
 import { Story } from './types/props';
 import { timestamp } from './helpers/date';
 
-import preview1 from './images/stories/preview-1.jpg';
-import preview2 from './images/stories/preview-2.jpg';
-import preview3 from './images/stories/preview-3.jpg';
-import preview4 from './images/stories/preview-4.jpg';
-import preview5 from './images/stories/preview-5.jpg';
-
-import poster11 from './images/stories/stories1_1.jpg';
-import poster12 from './images/stories/stories1_2.jpg';
-import poster13 from './images/stories/stories1_3.jpg';
-import poster21 from './images/stories/stories2_1.jpg';
-import poster22 from './images/stories/stories2_2.jpg';
-import poster23 from './images/stories/stories2_3.jpg';
-import poster31 from './images/stories/stories3_1.jpg';
-import poster41 from './images/stories/stories4_1.jpg';
-import poster42 from './images/stories/stories4_2.jpg';
-import poster43 from './images/stories/stories4_3.jpg';
-import poster51 from './images/stories/stories5_1.jpg';
-import poster52 from './images/stories/stories5_2.jpg';
-import poster53 from './images/stories/stories5_3.jpg';
-
 let stories: Array<Story> = [{
     id: 'story-1',
     name: 'Что такое «Час Земли»',
-    photo: preview1,
+    photo: './stories/preview-1.jpg',
     seen: false,
     gradient: 'red-orange',
     lastUpdated: timestamp(),
@@ -33,9 +13,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster11,
+        preview: './stories/stories1_1.jpg',
         seen: false,
-        src: poster11,
+        src: './stories/stories1_1.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -43,9 +23,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster12,
+        preview: './stories/stories1_2.jpg',
         seen: false,
-        src: poster12,
+        src: './stories/stories1_2.jpg',
         time: timestamp(),
         type: 'photo'
     },  {
@@ -53,16 +33,16 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster13,
+        preview: './stories/stories1_3.jpg',
         seen: false,
-        src: poster13,
+        src: './stories/stories1_3.jpg',
         time: timestamp(),
         type: 'photo'
     }]
 }, {
     id: 'story-2',
     name: 'С чего всё начиналось',
-    photo: preview2,
+    photo: './stories/preview-2.jpg',
     seen: false,
     gradient: 'blue-green',
     lastUpdated: timestamp(),
@@ -71,9 +51,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster21,
+        preview: './stories/stories2_1.jpg',
         seen: false,
-        src: poster21,
+        src: './stories/stories2_1.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -81,9 +61,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster22,
+        preview: './stories/stories2_2.jpg',
         seen: false,
-        src: poster22,
+        src: './stories/stories2_2.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -91,16 +71,16 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster23,
+        preview: './stories/stories2_3.jpg',
         seen: false,
-        src: poster23,
+        src: './stories/stories2_3.jpg',
         time: timestamp(),
         type: 'photo'
     }]
 }, {
     id: 'story-3',
     name: 'Подарок от WWF',
-    photo: preview3,
+    photo: './stories/preview-3.jpg',
     seen: false,
     gradient: 'orange-yellow',
     lastUpdated: timestamp(),
@@ -109,16 +89,16 @@ let stories: Array<Story> = [{
         length: 10,
         link: 'https://vk.cc/2jyAav',
         linkText: 'Пройти тест',
-        preview: poster31,
+        preview: './stories/stories3_1.jpg',
         seen: false,
-        src: poster31,
+        src: './stories/stories3_1.jpg',
         time: timestamp(),
         type: 'photo'
     }]
     }, {
     id: 'story-4',
     name: 'Час Земли в России',
-    photo: preview4,
+    photo: './stories/preview-4.jpg',
     seen: false,
     gradient: 'green-yellow',
     lastUpdated: timestamp(),
@@ -127,9 +107,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster41,
+        preview: './stories/stories4_1.jpg',
         seen: false,
-        src: poster41,
+        src: './stories/stories4_1.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -137,9 +117,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster42,
+        preview: './stories/stories4_2.jpg',
         seen: false,
-        src: poster42,
+        src: './stories/stories4_2.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -147,16 +127,16 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster43,
+        preview: './stories/stories4_3.jpg',
         seen: false,
-        src: poster43,
+        src: './stories/stories4_3.jpg',
         time: timestamp(),
         type: 'photo'
     }]
 }, {
     id: 'story-5',
     name: 'Что будет в 2020 году',
-    photo: preview5,
+    photo: './stories/preview-5.jpg',
     seen: false,
     gradient: 'purple-aqua',
     lastUpdated: timestamp(),
@@ -165,9 +145,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster51,
+        preview: './stories/stories5_1.jpg',
         seen: false,
-        src: poster51,
+        src: './stories/stories5_1.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -175,9 +155,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: null,
         linkText: false,
-        preview: poster52,
+        preview: './stories/stories5_2.jpg',
         seen: false,
-        src: poster52,
+        src: './stories/stories5_2.jpg',
         time: timestamp(),
         type: 'photo'
     }, {
@@ -185,9 +165,9 @@ let stories: Array<Story> = [{
         length: 10,
         link: 'https://vk.cc/arA20i',
         linkText: 'Узнать больше',
-        preview: poster53,
+        preview: './stories/stories5_3.jpg',
         seen: false,
-        src: poster53,
+        src: './stories/stories5_3.jpg',
         time: timestamp(),
         type: 'photo'
     }]
