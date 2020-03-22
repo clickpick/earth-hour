@@ -1,5 +1,5 @@
 diff --git a/node_modules/zuck.js/src/styles/modal.css b/node_modules/zuck.js/src/styles/modal.css
-index 00962bd..e3396ea 100644
+index 00962bd..c9fb786 100644
 --- a/node_modules/zuck.js/src/styles/modal.css
 +++ b/node_modules/zuck.js/src/styles/modal.css
 @@ -60,6 +60,10 @@
@@ -13,14 +13,24 @@ index 00962bd..e3396ea 100644
  #zuck-modal .slider {
    width: 300vw;
    height: 100%;
+@@ -251,7 +255,8 @@
+ }
+ #zuck-modal-content .story-viewer .head .left {
+   line-height: 1 !important;
+-  display: inline-block;
++  display: inline-flex;
++  align-items: flex-start;
+   margin: 6px 0;
+ }
+ #zuck-modal-content .story-viewer .head .left .info {
 diff --git a/node_modules/zuck.js/src/zuck.js b/node_modules/zuck.js/src/zuck.js
-index 039fca5..dbe3ccb 100644
+index 039fca5..9b1cc44 100644
 --- a/node_modules/zuck.js/src/zuck.js
 +++ b/node_modules/zuck.js/src/zuck.js
 @@ -168,6 +168,16 @@ module.exports = (window => {
        }
      };
- 
+   
 +    const translateY = function (element, to, duration, ease) {
 +      const transform = `translate3d(0, ${to}px, 0)`;
 +
@@ -88,7 +98,7 @@ index 039fca5..dbe3ccb 100644
 -        close () {
 +        close(isDirectionUp = false) {
            const modalContainer = query('#zuck-modal');
-           
+ 
 +
            const callback = function () {
              if (option('backNative')) {
