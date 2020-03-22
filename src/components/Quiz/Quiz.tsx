@@ -4,6 +4,7 @@ import { Questions } from '../../types/store';
 
 // @ts-ignore
 import { checkWebPSupport } from 'supports-webp-sync';
+import { pixelRatio } from '../../helpers/images';
 import { resultProps } from '../../config';
 import { shareApp, showStoryBox } from '../../helpers/vk';
 
@@ -20,6 +21,7 @@ import { ReactComponent as IconnUnion } from '../../svg/union.svg';
 import { ReactComponent as IconHome } from '../../svg/home.svg';
 
 const supportWebp: boolean = checkWebPSupport();
+const ratio: number = pixelRatio(3);
 
 export interface QuizProps {
     isRightAnswersCount: number,
@@ -68,15 +70,14 @@ const Quiz: FC<QuizProps> = ({
         }
 
         const { image } = questions[nextQuestionId];
+        // @ts-ignore
+        const bgUrl = (supportWebp) ? image.webp[`x${ratio}`] : image.jpg[`x${ratio}`];
 
         return (
             <div
                 className="Quiz__mask"
                 style={{
-                    backgroundImage: `
-                        linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)),
-                        url(${(supportWebp) ? image.webp.x1 : image.jpg.x1})
-                    `,
+                    backgroundImage: ` linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${bgUrl})`
                 }} />
         );
     }, [questions, nextQuestionId]);

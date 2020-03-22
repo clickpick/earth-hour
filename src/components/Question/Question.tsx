@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { Question as IQuestion, Answer as IAnswer } from '../../types/store';
 
+import { pixelRatio } from '../../helpers/images';
 import { share, showStoryBox, tapticNotification } from '../../helpers/vk';
 
 import Caption from '../Caption';
@@ -24,6 +25,8 @@ export interface QuestionProps extends IQuestion {
     goNext(): void,
     attachAnswer(questionId: number, answerId: number): void
 }
+
+const ratio: number = pixelRatio(3);
 
 const Question: FC<QuestionProps> = ({
     className, id,
@@ -148,7 +151,8 @@ const Question: FC<QuestionProps> = ({
                             size="large"
                             children={title}
                             hint={comment}
-                            poster={{ webp: image.webp.x2, jpg: image.jpg.x2 }} />
+                            // @ts-ignore
+                            poster={{ webp: image.webp[`x${ratio}`], jpg: image.jpg[`x${ratio}`] }} />
                         {hintView}
                         {resultActionsView}
                     </Group>
