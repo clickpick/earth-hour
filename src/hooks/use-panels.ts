@@ -27,36 +27,29 @@ export default function usePanels(initialActivePanel: string): UsePanels {
         window.history.pushState({ panel: nextPanel }, nextPanel);
     }, [initialActivePanel]);
 
-    const goBack = useCallback<GoBack>(() => {
-        setHistory(history => [...history].slice(0, history.length - 1));
-        window.history.back();
+    const goBack = useCallback<GoBack>(() => window.history.back(), []);
+
+    const back = useCallback<GoBack>(() => {
+        setHistory(history => {
+            if (history.length === 1) {
+                bridge.send('VKWebAppClose', { status: 'success' });
+
+                return history;
+            }
+
+            const nextHistory = [...history].slice(0, history.length - 1);
+            setActivePanel(nextHistory[nextHistory.length - 1]);
+
+            return nextHistory;
+        });
     }, []);
 
     useEffect(() => {
-        function handlePopState(e: PopStateEvent) {
+        window.addEventListener('popstate', (e: PopStateEvent) => {
             e.preventDefault();
-
-            if (e.state) {
-                if (e.state.panel === initialActivePanel) {
-                    bridge.send('VKWebAppDisableSwipeBack');
-                }
-
-                setActivePanel(e.state.panel);
-            } else {
-                setActivePanel(initialActivePanel);
-                bridge.send('VKWebAppDisableSwipeBack');
-                window.history.pushState({ panel: initialActivePanel }, initialActivePanel);
-            }
-        }
-
-        window.addEventListener('popstate', handlePopState);
-        window.history.pushState({ panel: initialActivePanel }, initialActivePanel);
-
-        return () => {
-            window.history.pushState(null, '');
-            window.removeEventListener('popstate', handlePopState);
-        };
-    }, [initialActivePanel]);
+            back();
+        });
+    }, [back]);
 
     return [activePanel, history, goForward, goBack];
 }
