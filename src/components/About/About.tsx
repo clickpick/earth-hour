@@ -8,7 +8,6 @@ import Footnote from '../../components/Footnote';
 import Group from '../../components/Group';
 import Button from '../../components/Button';
 
-import { ReactComponent as WWFLogo } from '../../svg/wwf.svg';
 import { ReactComponent as IconReply } from '../../svg/reply.svg';
 import { ReactComponent as IconVK } from '../../svg/vk.svg';
 import { ReactComponent as IconEarth } from '../../svg/earth.svg';
@@ -18,7 +17,7 @@ export interface AboutProps extends HTMLAttributes<HTMLDivElement> { }
 const About: FC<AboutProps> = (props: AboutProps) => {
     return (
         <Group vertical center {...props}>
-            <WWFLogo className="margin-aqua--bottom" />
+            <img src="./svg/wwf.svg" alt="wwf" className="margin-aqua--bottom" />
             <Headline>WWF России</Headline>
             <Footnote className="margin-purple--bottom color-opacity--secondary">Организатор акции</Footnote>
             <Group start>
