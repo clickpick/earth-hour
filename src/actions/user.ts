@@ -19,3 +19,8 @@ export const toggleNotifications = (value = false) => ({
         data: { value }
     }
 });
+
+export const toggleMessages = (value = false) => ({
+    type: ActionTypes.USER_TOGGLE_MESSAGES,
+    value
+});
