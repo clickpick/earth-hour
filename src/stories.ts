@@ -79,7 +79,7 @@ let stories: Array<Story> = [{
     }]
 }, {
     id: 'story-3',
-    name: 'Подарок от WWF',
+    name: 'Эксклюзивные обои от WWF',
     photo: './stories/preview-3.jpg',
     seen: false,
     gradient: 'orange-yellow',
