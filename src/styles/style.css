@@ -1,7 +1,10 @@
+@import './initial.css';
+
+@import '../../node_modules/@vkontakte/vkui/src/styles/constants.css';
 @import '../../node_modules/@vkontakte/vkui/src/styles/bright_light.css';
 @import '../../node_modules/@vkontakte/vkui/src/styles/space_gray.css';
-@import '../../node_modules/@vkontakte/vkui/src/styles/constants.css';
 @import '../../node_modules/@vkontakte/vkui/src/styles/animations.css';
+@import './constants.css';
 
 @import '../../node_modules/@vkontakte/vkui/src/components/View/View.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/Panel/Panel.css';
@@ -10,9 +13,6 @@
 @import '../../node_modules/@vkontakte/vkui/src/components/FixedLayout/FixedLayout.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/Separator/Separator.css';
 @import '../../node_modules/@vkontakte/vkui/src/components/HorizontalScroll/HorizontalScroll.css';
-
-@import './constants.css';
-@import './initial.css';
 
 @import './atomic.css';
 @import './animations.css';
