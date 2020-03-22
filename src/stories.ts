@@ -1,6 +1,12 @@
 import { Story } from './types/props';
 import { timestamp } from './helpers/date';
 
+import preview1 from './images/stories/preview-1.jpg';
+import preview2 from './images/stories/preview-2.jpg';
+import preview3 from './images/stories/preview-3.jpg';
+import preview4 from './images/stories/preview-4.jpg';
+import preview5 from './images/stories/preview-5.jpg';
+
 import poster11 from './images/stories/stories1_1.jpg';
 import poster12 from './images/stories/stories1_2.jpg';
 import poster13 from './images/stories/stories1_3.jpg';
@@ -18,7 +24,7 @@ import poster53 from './images/stories/stories5_3.jpg';
 let stories: Array<Story> = [{
     id: 'story-1',
     name: 'Что такое «Час Земли»',
-    photo: poster11,
+    photo: preview1,
     seen: false,
     gradient: 'red-orange',
     lastUpdated: timestamp(),
@@ -56,7 +62,7 @@ let stories: Array<Story> = [{
 }, {
     id: 'story-2',
     name: 'С чего всё начиналось',
-    photo: poster21,
+    photo: preview2,
     seen: false,
     gradient: 'blue-green',
     lastUpdated: timestamp(),
@@ -94,7 +100,7 @@ let stories: Array<Story> = [{
 }, {
     id: 'story-3',
     name: 'Подарок от WWF',
-    photo: poster31,
+    photo: preview3,
     seen: false,
     gradient: 'orange-yellow',
     lastUpdated: timestamp(),
@@ -112,7 +118,7 @@ let stories: Array<Story> = [{
     }, {
     id: 'story-4',
     name: 'Час Земли в России',
-    photo: poster41,
+    photo: preview4,
     seen: false,
     gradient: 'green-yellow',
     lastUpdated: timestamp(),
@@ -150,7 +156,7 @@ let stories: Array<Story> = [{
 }, {
     id: 'story-5',
     name: 'Что будет в 2020 году',
-    photo: poster51,
+    photo: preview5,
     seen: false,
     gradient: 'purple-aqua',
     lastUpdated: timestamp(),
