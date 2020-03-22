@@ -17,5 +17,5 @@
     background-size: cover;
     filter: blur(50px);
 
-    transition: all 15000ms ease-in;
+    transition: all 1500ms ease-in;
 }
