@@ -11,6 +11,7 @@ type ToggleNotifications = (value: boolean) => void
 export interface UseUser extends UserState {
     auth: Auth,
     toggleNotifications: ToggleNotifications,
+    toggleMessages: ToggleNotifications
 }
 
 export default function useUser(): UseUser {
@@ -21,6 +22,9 @@ export default function useUser(): UseUser {
     const toggleNotifications = useCallback<ToggleNotifications>((value) =>
         dispatch(UserActions.toggleNotifications(value)),
         [dispatch]);
+    const toggleMessages = useCallback<ToggleNotifications>((value) =>
+        dispatch(UserActions.toggleMessages(value)),
+        [dispatch]);
 
-    return { ...user, auth, toggleNotifications };
+    return { ...user, auth, toggleNotifications, toggleMessages };
 }
