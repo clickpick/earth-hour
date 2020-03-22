@@ -36,10 +36,10 @@ const Offline: FC<OfflineProps> = ({ visible = false }: OfflineProps) => {
         <div className={cn('Offline', `Offline--${animationType}`)} onAnimationEnd={handleAnimnationEnd}>
             <div className="Offline__mask" />
             <Planet
-                className="Offline__Planet"
+                className="Offline__Planet padding-blue"
                 mood="lock"
                 title="А где Интернет?"
-                message="Без доступа в Интернет мы не сможешь работать" />
+                message="Без доступа в Интернет мы не сможем работать" />
         </div>
     );
 };
