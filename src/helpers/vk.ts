@@ -1,6 +1,8 @@
 import bridge from '@vkontakte/vk-bridge';
 import { Links, WWF_GROUP_ID } from '../config';
 
+type AllowCallback = (result: boolean) => void
+
 export const share = (link: string) => bridge.send('VKWebAppShare', { link });
 export const shareApp = () => share(Links.APP_LINK);
 
@@ -26,5 +28,19 @@ export const showStoryBox = (stickerUrl: string) =>
 export const tapticNotification = (type: 'success' | 'warning' | 'error') =>
     bridge.send('VKWebAppTapticNotificationOccurred', { type });
 
-export const allowMessages = () =>
-    bridge.send('VKWebAppAllowMessagesFromGroup', { group_id: WWF_GROUP_ID });
+async function allowHelper(method: 'VKWebAppAllowMessagesFromGroup' | 'VKWebAppAllowNotifications', config?: any, callback?: AllowCallback) {
+    try {
+        const response: any = await bridge.sendPromise(method, config);
+
+        if (typeof callback === 'function') {
+            callback(response.result);
+        }
+    } catch (e) { }
+}
+
+
+export const allowMessages = (callback?: AllowCallback | any) =>
+    allowHelper('VKWebAppAllowMessagesFromGroup', { group_id: WWF_GROUP_ID }, callback);
+
+export const allowNotifications = (callback?: AllowCallback) =>
+    allowHelper('VKWebAppAllowNotifications', undefined, callback);
