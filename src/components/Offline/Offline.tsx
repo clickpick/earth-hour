@@ -1,6 +1,8 @@
 import React, { FC, useState, useCallback, useEffect, memo } from 'react';
 import cn from 'classnames';
 
+import useLockBody from '../../hooks/use-lock-body';
+
 import Planet from '../Planet';
 
 export interface OfflineProps {
@@ -12,6 +14,8 @@ export type AnimationType = 'enter' | 'leave';
 const Offline: FC<OfflineProps> = ({ visible = false }: OfflineProps) => {
     const [show, setShow] = useState<boolean>(visible);
     const [animationType, setAnimationType] = useState<AnimationType>('leave');
+
+    useLockBody(visible);
 
     const handleAnimnationEnd = useCallback(() => {
         if (animationType === 'leave') {
