@@ -1,4 +1,4 @@
-@import '../../../node_modules/zuck.js/src//styles/modal.css';
+@import '../../../node_modules/zuck.js/src/styles/modal.css';
 
 #zuck-modal-content .story-viewer .slides-pointers {
     padding-top: calc(var(--safe-area-inset-top, 0) - 6px);
