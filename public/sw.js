@@ -1,4 +1,6 @@
-this.addEventListener('install', (e) => {    
+/* eslint-disable */
+
+self.addEventListener('install', (e) => {    
     e.waitUntil(
         caches.open('v1').then((cache) => {
             return cache.addAll([
@@ -26,7 +28,7 @@ this.addEventListener('install', (e) => {
     )
 });
 
-this.addEventListener('fetch', (e) => {
+self.addEventListener('fetch', (e) => {
     if (e.request.method === 'GET' && !!e.request.url.match(/\.(js|css|woff|jpg|png|webp)/gm)) {        
         e.respondWith(
             caches.match(e.request).then((response) => {
@@ -41,3 +43,5 @@ this.addEventListener('fetch', (e) => {
         );
     }
 });
+
+/* eslint-enable */
