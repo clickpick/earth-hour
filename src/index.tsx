@@ -9,6 +9,8 @@ import bridge from '@vkontakte/vk-bridge';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
 
+import * as serviceWorker from './sw';
+
 bridge.send('VKWebAppInit');
 bridge.send(
     'VKWebAppSetViewSettings',
@@ -22,3 +24,5 @@ bridge.send(
 const store = configureStore();
 
 render(<Root store={store} />, document.getElementById('root'));
+
+serviceWorker.register();
