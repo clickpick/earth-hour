@@ -1,5 +1,5 @@
 export function register() {
-    if ('serviceWorker' in navigator) {
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         const publicUrl: URL = new URL(
             process.env.PUBLIC_URL,
             window.location.href
