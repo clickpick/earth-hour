@@ -1,0 +1,56 @@
+.Offline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.Offline__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #000;
+}
+
+@supports (backdrop-filter: blur(50px)) {
+    .Offline__mask {
+        background-color: transparent;
+        backdrop-filter: blur(50px);
+    }
+}
+
+.Offline--enter .Offline__mask {
+    animation: modal-fade-enter 150ms ease-in;
+}
+
+.Offline--leave .Offline__mask {
+    animation: modal-fade-leave 150ms ease-in;
+}
+
+@keyframes modal-fade-enter {
+    from {
+        background-color: transparent;
+        backdrop-filter: blur(0);
+    }
+}
+
+@keyframes modal-fade-leave {
+    to {
+        background-color: transparent;
+        backdrop-filter: blur(0);
+    }
+}
