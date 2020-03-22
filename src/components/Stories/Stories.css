@@ -49,38 +49,43 @@
 }
 
 .stories.list .story > .item-link > .item-preview {
-  height: 42px;
-  width: 42px;
-  max-width: 42px;
-  margin-right: 12px;
-  vertical-align: top;
-  display: inline-block;
-  box-sizing: border-box;
-  font-size: 0;
-  overflow: hidden;
+    height: 42px;
+    width: 42px;
+    max-width: 42px;
+    margin-right: 12px;
+    vertical-align: top;
+    display: inline-block;
+    box-sizing: border-box;
+    font-size: 0;
+    overflow: hidden;
 }
+
 .stories.list .story > .item-link > .item-preview img {
-  display: block;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
+    display: block;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
 }
+
 .stories.list .story > .item-link > .info {
-  display: inline-block;
-  line-height: 1.6em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: top;
+    display: inline-block;
+    line-height: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
 }
+
 .stories.list .story > .item-link > .info .name {
-  font-weight: 500;
-  display: block;
+    font-weight: 500;
+    display: block;
 }
+
 .stories.list .story > .item-link > .info .time {
-  display: inline-block;
+    display: inline-block;
 }
+
 .stories.list .story > .items {
-  display: none;
+    display: none;
 }
