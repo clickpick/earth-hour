@@ -30,7 +30,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
             avatars: true,
             openEffect: true,
             // cubeEffect: true,
-            autoFullScreen: true,
+            autoFullScreen: false,
             previousTap: true,
             localStorage: false,
             reactive: true,
