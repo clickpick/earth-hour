@@ -5,7 +5,7 @@ import { Questions } from '../../types/store';
 // @ts-ignore
 import { checkWebPSupport } from 'supports-webp-sync';
 import { pixelRatio } from '../../helpers/images';
-import { resultProps } from '../../config';
+import { generateResultProps } from '../../config';
 import { shareApp, showStoryBox } from '../../helpers/vk';
 
 import Question from '../Question';
@@ -110,12 +110,18 @@ const Quiz: FC<QuizProps> = ({
                     ? 'good'
                     : 'bad';
 
+        const props = generateResultProps(
+            mood,
+            (finish) ? 5 : isRight.current,
+            (finish) ? 5 : answersCount
+        );
+
         return (
             <Transition in={true} timeout={100}>
                 <Planet
                     className="margin-pink--bottom padding-blue--rl"
                     mood={mood}
-                    {...resultProps[mood]} />
+                    {...props} />
                 <Group jcCenter>
                     <Button
                         className="margin-purple--right"
