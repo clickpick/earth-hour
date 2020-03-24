@@ -9,18 +9,34 @@ export const shareApp = () => share(Links.APP_LINK);
 export const showStoryBox = (stickerUrl: string) =>
     bridge.send('VKWebAppShowStoryBox', {
         background_type: 'none',
+        attachment: {
+            text: 'Пройти квиз',
+            type: 'url',
+            url: Links.APP_LINK,
+        },
         stickers: [
             {
                 sticker_type: 'renderable',
                 sticker: {
                     content_type: 'image',
                     url: stickerUrl,
+                    can_delete: false,
                     transform: {
                         translation_y: 0.08,
                         relation_width: 0.6,
                         gravity: 'right_top'
                     },
-                }
+                    clickable_zones: [{
+                        action_type: 'link',
+                        action: { link: Links.APP_LINK, tooltip_text_key: 'Пройти квиз' },
+                        clickable_area: [
+                            { x: 0, y: 0 },
+                            { x: 1029, y: 0 },
+                            { x: 1029, y: 1242 },
+                            { x: 0, y: 1242 }
+                        ]
+                    }]
+                },
             }
         ]
     });
