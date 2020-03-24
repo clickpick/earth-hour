@@ -163,7 +163,7 @@ let stories: Array<Story> = [{
     }, {
         id: 'story-5-3',
         length: 10,
-        link: 'https://vk.cc/arA20i',
+        link: 'https://vk.cc/arICHK',
         linkText: 'Узнать больше',
         preview: './stories/stories5_3.jpg',
         seen: false,
