@@ -16,7 +16,6 @@ import Group from '../components/Group';
 import Stories from '../components/Stories';
 import About from '../components/About';
 
-import posterQuiz from '../images/poster-quiz-mini.png';
 import posterQuiz2 from '../images/poster-quiz-2-mini.png';
 
 export interface MainProps extends PanelPrimary { }
@@ -51,17 +50,9 @@ const Main: FC<MainProps> = ({ id, goForward }: MainProps) => {
                 <Group className="margin-pink--bottom padding-orange--rl" vertical>
                     <Card
                         className="margin-pink--bottom"
-                        poster={posterQuiz}
+                        poster={posterQuiz2}
                         hint={quizMessage}
                         data-to={HomePanels.VOTE}
-                        onClick={goForward}>
-                        Всё об акции «Час Земли» за 5 минут
-                    </Card>
-                    <Card
-                        className="margin-pink--bottom"
-                        poster={posterQuiz2}
-                        hint="Квиз будет доступен 28 марта"
-                        data-to={HomePanels.VOTE_2}
                         onClick={goForward}>
                         Узнай, кто ты для планеты, и получи подарок от VK и WWF
                     </Card>
