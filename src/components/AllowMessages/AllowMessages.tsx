@@ -10,12 +10,20 @@ import Button from '../Button';
 
 import { ReactComponent as IconMessage } from '../../svg/message.svg';
 
-export interface AllowMessagesProps extends HTMLAttributes<HTMLDivElement> { }
+export interface AllowMessagesProps extends HTMLAttributes<HTMLDivElement> {
+    successCallback?(): void
+}
 
-const AllowMessages: FC<AllowMessagesProps> = ({ className }: AllowMessagesProps) => {
+const AllowMessages: FC<AllowMessagesProps> = ({ className, successCallback }: AllowMessagesProps) => {
     const { data, toggleMessages } = useUser();
 
-    const allowMessage = useCallback(() => allowMessages(toggleMessages), [toggleMessages]);
+    const allowMessage = useCallback(() => allowMessages((result: boolean) => {
+        toggleMessages(result);
+
+        if (successCallback && result) {
+            successCallback();
+        }
+    }), [toggleMessages, successCallback]);
 
     if (!data || data.messagesAreEnabled) {
         return null;
