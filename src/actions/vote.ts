@@ -40,7 +40,7 @@ export const setIsRightAnswersCount = (count: number) => ({
 export const sendAnswers = (answers: Array<UserAnswer>) => ({
     [CALL_API]: {
         types: ['', ActionTypes.SET_FINISH, ''],
-        endpoint: '/votes/1/verify',
+        endpoint: '/votes/2/verify',
         method: Methods.POST,
         schema: {},
         data: { answers }
