@@ -37,13 +37,14 @@ export interface QuizProps {
     setIsRightAnswersCount(count: number): void,
     attachAnswer(questionId: number, answerId: number): void,
     resetQuiz(): void,
-    exit(): void
+    exit(): void,
+    present?(): void,
 }
 
 const Quiz: FC<QuizProps> = ({
     isRightAnswersCount, questionIds, questions, nextQuestionId,
     image, storyLink, answersCount, finish,
-    setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, exit
+    setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, exit, present
 }: QuizProps) => {
     const isRight = useRef<number>(isRightAnswersCount);
 
@@ -120,8 +121,8 @@ const Quiz: FC<QuizProps> = ({
 
         const props = generateResultProps(
             mood,
-            (finish) ? 5 : isRight.current,
-            (finish) ? 5 : answersCount
+            (finish) ? 8 : isRight.current,
+            (finish) ? 8 : answersCount
         );
 
         return (
@@ -174,7 +175,7 @@ const Quiz: FC<QuizProps> = ({
     return (
         <div className="Quiz">
             {maskView}
-            <AllowMessages className="margin-pink--bottom" />
+            <AllowMessages successCallback={present} className="margin-pink--bottom" />
             {bodyView}
         </div>
     );
