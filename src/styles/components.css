@@ -18,4 +18,6 @@
 
 @import '../components/Quiz/Quiz.css';
 
+@import '../components/AllowMessages/AllowMessages.css';
+
 @import '../components/Offline/Offline.css';

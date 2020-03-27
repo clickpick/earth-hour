@@ -1,0 +1,5 @@
+@supports (backdrop-filter: blur(50px)) {
+    .AllowMessages {
+        backdrop-filter: blur(50px);
+    }
+}
