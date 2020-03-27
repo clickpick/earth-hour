@@ -10,7 +10,7 @@ export interface VoteProps extends PanelSecondary { }
 
 const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
     const {
-        questionIds, questions, answers, storyLink,
+        questionIds, questions, answers, image, storyLink,
         isRightAnswersCount, nextQuestionId, finish,
         setNextQuestionId, attachAnswer, setIsRightAnswersCount,
         sendAnswers, resetQuiz
@@ -41,6 +41,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
             questionIds={questionIds}
             questions={questions}
             nextQuestionId={nextQuestionId}
+            image={image}
             storyLink={storyLink as string}
             answersCount={answers.length}
             finish={finish}
@@ -50,7 +51,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
             resetQuiz={resetQuiz}
             exit={goBack} />,
         [
-            isRightAnswersCount, questionIds, questions, nextQuestionId, storyLink, answers, finish,
+            isRightAnswersCount, questionIds, questions, nextQuestionId, image, storyLink, answers, finish,
             setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, goBack
         ]);
 
