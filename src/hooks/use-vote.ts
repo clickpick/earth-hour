@@ -11,6 +11,7 @@ type AttachAnswer = (questionId: number, answerId: number) => void;
 type SetIsRightAnswersCount = (count: number) => void;
 type ResetQuiz = () => void;
 type SendAnswers = (answers: Array<UserAnswer>) => void
+type Present = () => void;
 
 export interface UseVote extends VoteState {
     getQuestions: GetQuestions,
@@ -18,7 +19,8 @@ export interface UseVote extends VoteState {
     attachAnswer: AttachAnswer,
     setIsRightAnswersCount: SetIsRightAnswersCount,
     sendAnswers: SendAnswers, 
-    resetQuiz: ResetQuiz
+    resetQuiz: ResetQuiz,
+    present: Present
 }
 
 export default function useVote(): UseVote {
@@ -33,6 +35,11 @@ export default function useVote(): UseVote {
         dispatch(VoteActions.setIsRightAnswersCount(count)), [dispatch]);
     const sendAnswers = useCallback<SendAnswers>((answers) => dispatch(VoteActions.sendAnswers(answers)), [dispatch]);
     const resetQuiz = useCallback<ResetQuiz>(() => dispatch(VoteActions.resetQuiz()), [dispatch]);
+    const present = useCallback<Present>(() => dispatch(VoteActions.present()), [dispatch]);
 
-    return { ...vote, getQuestions, setNextQuestionId, attachAnswer, setIsRightAnswersCount, sendAnswers, resetQuiz };
+    return {
+        ...vote,
+        getQuestions, setNextQuestionId, attachAnswer,
+        setIsRightAnswersCount, sendAnswers, resetQuiz, present
+    };
 }
