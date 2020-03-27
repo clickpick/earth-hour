@@ -13,7 +13,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
         questionIds, questions, answers, image, storyLink,
         isRightAnswersCount, nextQuestionId, finish,
         setNextQuestionId, attachAnswer, setIsRightAnswersCount,
-        sendAnswers, resetQuiz
+        sendAnswers, resetQuiz, present
     } = useVote();
 
     useEffect(() => {
@@ -49,10 +49,11 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
             setIsRightAnswersCount={setIsRightAnswersCount}
             attachAnswer={attachAnswer}
             resetQuiz={resetQuiz}
-            exit={goBack} />,
+            exit={goBack}
+            present={present} />,
         [
             isRightAnswersCount, questionIds, questions, nextQuestionId, image, storyLink, answers, finish,
-            setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, goBack
+            setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, goBack, present
         ]);
 
     return (
