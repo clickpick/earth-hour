@@ -61,3 +61,12 @@ export const resetQuiz = () => (dispath: any, getState: any) => {
         nextQuestionId
     });
 };
+
+export const present = () => ({
+    [CALL_API]: {
+        types: ['', ActionTypes.SET_FINISH, ''],
+        endpoint: '/votes/2/present',
+        method: Methods.POST,
+        schema: {}
+    }
+});
