@@ -13,7 +13,7 @@ import Planet from '../Planet';
 import Transition from '../Transition';
 import Group from '../Group';
 import Button from '../Button';
-import WWFPrize from '../WWFPrize';
+import PeopleNature from '../PeopleNature';
 
 import { ReactComponent as IconReply } from '../../svg/reply.svg';
 import { ReactComponent as IconAgain } from '../../svg/again.svg';
@@ -153,7 +153,7 @@ const Quiz: FC<QuizProps> = ({
                         Вернуться<br />на главную
                     </Button>
                 </Group>
-                {(showPrize) && <WWFPrize className="margin-pink--top" />}
+                {(showPrize) && <PeopleNature className="margin-pink--top" />}
             </Transition>
         );
     }, [finish, answersCount, shareStory, reset, exit]);
