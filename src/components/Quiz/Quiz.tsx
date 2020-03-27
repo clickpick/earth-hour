@@ -1,6 +1,6 @@
 import React, { FC, useRef, useMemo, useCallback, useEffect, memo } from 'react';
 
-import { Questions } from '../../types/store';
+import { Questions, Image } from '../../types/store';
 
 // @ts-ignore
 import { checkWebPSupport } from 'supports-webp-sync';
@@ -28,6 +28,7 @@ export interface QuizProps {
     questionIds: Array<number>,
     questions: Questions,
     nextQuestionId: number | null,
+    image: Image | null,
     storyLink: string,
     answersCount: number,
     finish: boolean,
@@ -40,7 +41,7 @@ export interface QuizProps {
 
 const Quiz: FC<QuizProps> = ({
     isRightAnswersCount, questionIds, questions, nextQuestionId,
-    storyLink, answersCount, finish,
+    image, storyLink, answersCount, finish,
     setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, exit
 }: QuizProps) => {
     const isRight = useRef<number>(isRightAnswersCount);
@@ -65,13 +66,19 @@ const Quiz: FC<QuizProps> = ({
     }, [finish, setNextQuestionId, setIsRightAnswersCount]);
 
     const maskView = useMemo(() => {
-        if (nextQuestionId === null) {
-            return null;
+        let bgUrl: string | null = null;
+        if (nextQuestionId !== null) {
+            const { image: imageQ } = questions[nextQuestionId];
+            // @ts-ignore
+            bgUrl = (supportWebp) ? imageQ.webp[`x${ratio}`] : imageQ.jpg[`x${ratio}`];
+        } else if (image !== null) {
+            // @ts-ignore
+            bgUrl = (supportWebp) ? image.webp[`x${ratio}`] : image.jpg[`x${ratio}`];
         }
 
-        const { image } = questions[nextQuestionId];
-        // @ts-ignore
-        const bgUrl = (supportWebp) ? image.webp[`x${ratio}`] : image.jpg[`x${ratio}`];
+        if (bgUrl === null) {
+            return;
+        }
 
         return (
             <div
@@ -80,7 +87,7 @@ const Quiz: FC<QuizProps> = ({
                     backgroundImage: ` linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${bgUrl})`
                 }} />
         );
-    }, [questions, nextQuestionId]);
+    }, [questions, nextQuestionId, image]);
 
     const questionView = useCallback((id, index) => {
         if (nextQuestionId !== id) {
