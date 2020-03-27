@@ -21,7 +21,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
     const classNames = useMemo(() => cn(className, 'Stories'), [className]);
 
     const storiesAPI = useRef(null);
-    const [state, setState] = useState<any[]>(stories);
+    const [state, setState] = useState<Array<Story>>(stories);
 
     useEffect(() => {
         storiesAPI.current = new Zuck('stories-react', {
@@ -38,7 +38,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
             callbacks: {
                 onDataUpdate: function (currentState: any, callback: any) {
                     setState(currentState);
-                    // setTimeout(callback, 200);
+                    setTimeout(callback, 200);
                 }
             }
         });
@@ -49,7 +49,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
 
         state.forEach((story: Story, storyId: number) => {
             const items = story.items.map((storyItem: IStoryItem) => (
-                <li key={storyItem.id} data-id={storyItem.id} data-time={storyItem.time} className={(storyItem.seen ? 'seen' : '')}>
+                <li key={storyItem.id} data-id={storyItem.id} data-time={storyItem.time}>
                     <a href={storyItem.src} data-type={storyItem.type} data-length={storyItem.length} data-link={storyItem.link} data-link-text={storyItem.linkText}>
                         <img src={storyItem.preview} alt="" />
                     </a>
@@ -63,7 +63,7 @@ const Stories: FC<StoriesProps> = ({ className, stories }: StoriesProps) => {
                     data-id={storyId}
                     data-last-updated={story.lastUpdated}
                     data-photo={story.photo}
-                    seen={story.seen}
+                    seen={false}
                     photo={story.photo}
                     name={story.name}
                     gradient={story.gradient}
