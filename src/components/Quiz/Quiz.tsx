@@ -13,6 +13,7 @@ import Planet from '../Planet';
 import Transition from '../Transition';
 import Group from '../Group';
 import Button from '../Button';
+import AllowMessages from '../AllowMessages';
 import PeopleNature from '../PeopleNature';
 
 import { ReactComponent as IconReply } from '../../svg/reply.svg';
@@ -173,6 +174,7 @@ const Quiz: FC<QuizProps> = ({
     return (
         <div className="Quiz">
             {maskView}
+            <AllowMessages className="margin-pink--bottom" />
             {bodyView}
         </div>
     );
