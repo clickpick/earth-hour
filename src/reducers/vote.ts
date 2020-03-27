@@ -59,7 +59,7 @@ function storyLink(state = initialStoryLink, action: VoteReducerActions): string
 function nextQuestionId(state = initialNextQuestionId, action: VoteReducerActions): number | null {
     switch (action.type) {
         case ActionTypes.USER_AUTH_SUCCESS:
-            return (action.payload.result.successfulPolls[0] && action.payload.result.successfulPolls[0].id === 1)
+            return (!!action.payload.result.successfulPolls.find(quiz => quiz.id === 2))
                 ? null
                 : state;
         case ActionTypes.VOTE_SUCCESS:
@@ -103,7 +103,7 @@ function isRightAnswersCount(state = initialIsRightAnswersCount, action: VoteRed
 
 function finish(state = initialFinish, action: VoteReducerActions): boolean {
     if (action.type === ActionTypes.USER_AUTH_SUCCESS) {
-        if (action.payload.result.successfulPolls[0] && action.payload.result.successfulPolls[0].id === 1) {
+        if (!!action.payload.result.successfulPolls.find(quiz => quiz.id === 2)) {
             return true;
         }
     }
