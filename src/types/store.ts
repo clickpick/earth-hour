@@ -34,6 +34,19 @@ export interface Action {
     [index: string]: any
 }
 
+export interface Image {
+    jpg: {
+        x1: string,
+        x2: string,
+        x3: string
+    },
+    webp: {
+        x1: string,
+        x2: string,
+        x3: string
+    }
+}
+
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /**
@@ -65,18 +78,7 @@ export interface Question {
     readonly comment: string,
     readonly storyLink: string,
     readonly landLink: string,
-    readonly image: {
-        jpg: {
-            x1: string,
-            x2: string,
-            x3: string
-        },
-        webp: {
-            x1: string,
-            x2: string,
-            x3: string
-        }
-    },
+    readonly image: Image,
     readonly answers: Array<Answer>
 }
 
@@ -91,6 +93,7 @@ export interface UserAnswer {
 export interface VoteState extends DataState {
     readonly questionIds: QuestionIds,
     readonly questions: Questions,
+    readonly image: Image | null,
     readonly storyLink: string | null,
     readonly nextQuestionId: number | null,
     readonly answers: Array<UserAnswer>
@@ -143,6 +146,7 @@ export interface VoteSuccess {
                 [index: string]: {
                     id: string,
                     questions: IdsArray,
+                    image: Image,
                     storyLink: string
                 }
             }

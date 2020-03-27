@@ -1,6 +1,6 @@
 import {
     ActionTypes,
-    QuestionIds, Questions, UserAnswer, VoteState,
+    QuestionIds, Questions, Image, UserAnswer, VoteState,
     VoteLoad, VoteSuccess, VoteFailure, UserAuthSuccess,
     SetNextQuestionId, AttachAnswer, SetIsRightAnswersCount, SetFinish, ResetQuiz
 } from '../types/store';
@@ -12,6 +12,7 @@ type VoteReducerActions = VoteLoad | VoteSuccess | VoteFailure | UserAuthSuccess
 
 const initialQuesitionIds: QuestionIds = null;
 const initialQuesitions: Questions = {};
+const initialImage: Image | null = null;
 const initialStoryLink: string | null = null;
 const initialNextQuestionId: number | null = 0;
 const initialAnswers: Array<UserAnswer> = [];
@@ -23,6 +24,7 @@ export const voteInitialState: VoteState = {
     error: initialError,
     questionIds: initialQuesitionIds,
     questions: initialQuesitions,
+    image: initialImage,
     storyLink: initialStoryLink,
     nextQuestionId: initialNextQuestionId,
     answers: initialAnswers,
@@ -46,6 +48,14 @@ function questions(state = initialQuesitions, action: VoteReducerActions): Quest
         default:
             return state;
     }
+}
+
+function image(state = initialImage, action: VoteReducerActions): Image | null {
+    if (action.type === ActionTypes.VOTE_SUCCESS) {
+        return action.payload.entities.votes[action.payload.result].image;
+    }
+
+    return state;
 }
 
 function storyLink(state = initialStoryLink, action: VoteReducerActions): string | null {
@@ -125,6 +135,7 @@ export default function vote(state = voteInitialState, action: VoteReducerAction
         error: isError<VoteReducerActions>(state.error, action, ActionTypes.VOTE_FAILURE),
         questionIds: questionIds(state.questionIds, action),
         questions: questions(state.questions, action),
+        image: image(state.image, action),
         storyLink: storyLink(state.storyLink, action),
         nextQuestionId: nextQuestionId(state.nextQuestionId, action),
         answers: answers(state.answers, action),
