@@ -25,24 +25,8 @@
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
 
 /* Paddings */
-.padding-red--top {
-    padding-top: 24px;
-}
-
-.padding-red--bottom {
-    padding-bottom: 24px;
-}
-
 .padding-orange--rl {
     padding-right: 24px;
-    padding-left: 24px;
-}
-
-.padding-orange--right {
-    padding-right: 24px;
-}
-
-.padding-orange--left {
     padding-left: 24px;
 }
 
@@ -60,45 +44,9 @@
     padding-left: 8px;
 }
 
-.padding-yellow--top {
-    padding-top: 8px;
-}
-
-.padding-yellow--right {
-    padding-right: 8px;
-}
-
-.padding-yellow--bottom {
-    padding-bottom: 8px;
-}
-
-.padding-yellow--left {
-    padding-left: 8px;
-}
-
 .padding-green--tb {
     padding-top: 12px;
     padding-bottom: 12px;
-}
-
-.padding-green {
-    padding: 12px;
-}
-
-.padding-green--top {
-    padding-top: 12px;
-}
-
-.padding-green--right {
-    padding-right: 12px;
-}
-
-.padding-green--bottom {
-    padding-bottom: 12px;
-}
-
-.padding-green--left {
-    padding-left: 12px;
 }
 
 .padding-blue {
@@ -114,16 +62,8 @@
     padding-top: 16px;
 }
 
-.padding-blue--right {
-    padding-right: 16px;
-}
-
 .padding-blue--bottom {
     padding-bottom: 16px;
-}
-
-.padding-blue--left {
-    padding-left: 16px;
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -143,10 +83,6 @@
 
 .margin-aqua--bottom {
     margin-bottom: 8px;
-}
-
-.margin-aqua--left {
-    margin-left: 8px;
 }
 
 .margin-purple--top {
@@ -169,16 +105,8 @@
     margin-top: 24px;
 }
 
-.margin-pink--right {
-    margin-right: 24px;
-}
-
 .margin-pink--bottom {
     margin-bottom: 24px;
-}
-
-.margin-pink--left {
-    margin-left: 24px;
 }
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––– */
