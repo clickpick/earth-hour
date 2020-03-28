@@ -18,9 +18,25 @@
     cursor: pointer;
 }
 
+.Button::disabled {
+    opacity: 0.6;
+}
+
 a.Button {
     text-decoration: none;
     text-align: center;
+}
+
+.Button--round {
+    width: 270px;
+    height: 44px;
+
+    border-radius: 4px;
+
+    background-color: #FFF;
+
+    font-size: var(--font-size-20);
+    color: #000;
 }
 
 .Button--circle {
