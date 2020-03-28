@@ -40,6 +40,44 @@ let stories: Array<Story> = [{
         type: 'photo'
     }]
 }, {
+    id: 'story-5',
+    name: 'Что будет в 2020 году',
+    photo: './stories/preview-5.jpg',
+    seen: false,
+    gradient: 'purple-aqua',
+    lastUpdated: timestamp(),
+    items: [{
+        id: 'story-5-1',
+        length: 10,
+        link: null,
+        linkText: false,
+        preview: './stories/stories5_1.jpg',
+        seen: false,
+        src: './stories/stories5_1.jpg',
+        time: timestamp(),
+        type: 'photo'
+    }, {
+        id: 'story-5-2',
+        length: 10,
+        link: null,
+        linkText: false,
+        preview: './stories/stories5_2.jpg',
+        seen: false,
+        src: './stories/stories5_2.jpg',
+        time: timestamp(),
+        type: 'photo'
+    }, {
+        id: 'story-5-3',
+        length: 10,
+        link: 'https://vk.cc/arICHK',
+        linkText: 'Узнать больше',
+        preview: './stories/stories5_3.jpg',
+        seen: false,
+        src: './stories/stories5_3.jpg',
+        time: timestamp(),
+        type: 'photo'
+    }]
+}, {
     id: 'story-2',
     name: 'С чего всё начиналось',
     photo: './stories/preview-2.jpg',
@@ -130,44 +168,6 @@ let stories: Array<Story> = [{
         preview: './stories/stories4_3.jpg',
         seen: false,
         src: './stories/stories4_3.jpg',
-        time: timestamp(),
-        type: 'photo'
-    }]
-}, {
-    id: 'story-5',
-    name: 'Что будет в 2020 году',
-    photo: './stories/preview-5.jpg',
-    seen: false,
-    gradient: 'purple-aqua',
-    lastUpdated: timestamp(),
-    items: [{
-        id: 'story-5-1',
-        length: 10,
-        link: null,
-        linkText: false,
-        preview: './stories/stories5_1.jpg',
-        seen: false,
-        src: './stories/stories5_1.jpg',
-        time: timestamp(),
-        type: 'photo'
-    }, {
-        id: 'story-5-2',
-        length: 10,
-        link: null,
-        linkText: false,
-        preview: './stories/stories5_2.jpg',
-        seen: false,
-        src: './stories/stories5_2.jpg',
-        time: timestamp(),
-        type: 'photo'
-    }, {
-        id: 'story-5-3',
-        length: 10,
-        link: 'https://vk.cc/arICHK',
-        linkText: 'Узнать больше',
-        preview: './stories/stories5_3.jpg',
-        seen: false,
-        src: './stories/stories5_3.jpg',
         time: timestamp(),
         type: 'photo'
     }]
