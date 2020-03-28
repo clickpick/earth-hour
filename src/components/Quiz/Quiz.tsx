@@ -1,4 +1,4 @@
-import React, { FC, useRef, useMemo, useCallback, useEffect, memo } from 'react';
+import React, { FC, useState, useRef, useMemo, useCallback, useEffect, memo } from 'react';
 
 import { Questions, Image } from '../../types/store';
 
@@ -33,6 +33,7 @@ export interface QuizProps {
     storyLink: string,
     answersCount: number,
     finish: boolean,
+    hasPresent?: boolean,
     setNextQuestionId(): void,
     setIsRightAnswersCount(count: number): void,
     attachAnswer(questionId: number, answerId: number): void,
@@ -43,10 +44,13 @@ export interface QuizProps {
 
 const Quiz: FC<QuizProps> = ({
     isRightAnswersCount, questionIds, questions, nextQuestionId,
-    image, storyLink, answersCount, finish,
+    image, storyLink, answersCount, finish, hasPresent,
     setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, exit, present
 }: QuizProps) => {
+    const [showGetPresent, setShowGetPresent] = useState<boolean>(!!hasPresent);
     const isRight = useRef<number>(isRightAnswersCount);
+    // eslint-disable-next-line
+    const isFinish = useMemo(() => finish, []);
 
     const questionsCount = useMemo<number>(() => (Array.isArray(questionIds) && questionIds.length) || 0, [questionIds]);
     const shareStory = useCallback(() => showStoryBox(storyLink), [storyLink]);
@@ -59,6 +63,14 @@ const Quiz: FC<QuizProps> = ({
         isRight.current = 0;
         resetQuiz();
     }, [resetQuiz]);
+
+    const getPresent = useCallback((e: any) => {
+        e.target.disabled = true;
+        if (present) {
+            present();
+            setShowGetPresent(false);
+        }
+    }, [present]);
 
     useEffect(() => () => {
         if (!finish) {
@@ -111,18 +123,18 @@ const Quiz: FC<QuizProps> = ({
 
     const resultView = useMemo(() => {
         const result = (isRight.current / answersCount) * 100 || 0;
-        const showPrize = finish || result === 100;
+        const showPrize = isFinish || result >= 75;
         let mood: 'best' | 'good' | 'bad' | 'lock' =
             (showPrize)
                 ? 'best'
-                : (result >= 60 && result <= 80)
+                : (result >= 37 && result < 75)
                     ? 'good'
                     : 'bad';
 
         const props = generateResultProps(
             mood,
-            (finish) ? 8 : isRight.current,
-            (finish) ? 8 : answersCount
+            (isFinish) ? 8 : isRight.current,
+            (isFinish) ? 8 : answersCount
         );
 
         return (
@@ -154,7 +166,6 @@ const Quiz: FC<QuizProps> = ({
                             onClick={reset}>
                             Повторить квиз<br />заново
                         </Button>}
-
                     <Button
                         shape="circle"
                         icon={<IconHome />}
@@ -162,10 +173,14 @@ const Quiz: FC<QuizProps> = ({
                         Вернуться<br />на главную
                     </Button>
                 </Group>
+                {(showGetPresent) &&
+                    <Group className="margin-pink--top" jcCenter>
+                        <Button children="Получить подарок" onClick={getPresent} />
+                    </Group>}
                 {(showPrize) && <PeopleNature className="margin-pink--top" />}
             </Transition>
         );
-    }, [finish, answersCount, shareStory, reset, exit]);
+    }, [isFinish, showGetPresent, answersCount, shareStory, reset, exit, getPresent]);
 
     const bodyView = useMemo(() => (nextQuestionId !== null)
         ? questionIds.map(questionView)

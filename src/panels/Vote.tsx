@@ -2,6 +2,7 @@ import React, { FC, useEffect, useMemo } from 'react';
 
 import { PanelSecondary } from '../types/props';
 import useVote from '../hooks/use-vote';
+import useUser from '../hooks/use-user';
 
 import { Panel, PanelHeaderSimple, PanelHeaderBack } from '@vkontakte/vkui';
 import Quiz from '../components/Quiz';
@@ -15,10 +16,13 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
         setNextQuestionId, attachAnswer, setIsRightAnswersCount,
         sendAnswers, resetQuiz, present
     } = useVote();
+    const { data } = useUser();
+
+    const hasPresent = useMemo<boolean>(() => finish && !!data?.messagesAreEnabled && !data?.hasPresent, [finish, data]);
 
     useEffect(() => {
         if (!finish && answers.length === questionIds?.length && nextQuestionId === null) {
-            setTimeout(() => { sendAnswers(answers); }, 1500);
+            sendAnswers(answers);
         }
     }, [finish, answers, questionIds, nextQuestionId, sendAnswers]);
 
@@ -45,6 +49,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
             storyLink={storyLink as string}
             answersCount={answers.length}
             finish={finish}
+            hasPresent={hasPresent}
             setNextQuestionId={setNextQuestionId}
             setIsRightAnswersCount={setIsRightAnswersCount}
             attachAnswer={attachAnswer}
@@ -52,7 +57,7 @@ const Vote: FC<VoteProps> = ({ id, goBack }: VoteProps) => {
             exit={goBack}
             present={present} />,
         [
-            isRightAnswersCount, questionIds, questions, nextQuestionId, image, storyLink, answers, finish,
+            isRightAnswersCount, questionIds, questions, nextQuestionId, image, storyLink, answers, finish, hasPresent,
             setNextQuestionId, setIsRightAnswersCount, attachAnswer, resetQuiz, goBack, present
         ]);
 
