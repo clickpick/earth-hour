@@ -58,7 +58,8 @@ export interface User {
     readonly vkUserId: number,
     readonly messagesAreEnabled: boolean,
     readonly notificationsAreEnabled: boolean,
-    readonly successfulPolls: Array<{ id: number }>
+    readonly successfulPolls: Array<{ id: number }>,
+    readonly hasPresent: boolean
 }
 
 export interface UserState extends DataState {
