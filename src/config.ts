@@ -46,23 +46,23 @@ export const results = {
     ],
     best: [
         {
-            title: (answersCount: number, maxCount?: number) => generateTitle('Отлично, ты прошёл на n из m', answersCount, maxCount),
+            title: (answersCount: number, maxCount?: number) => generateTitle('Отлично, ты прошёл квиз!', answersCount, maxCount),
             message: 'С таким знатоком не пропадёшь!'
         },
         {
-            title: (answersCount: number, maxCount?: number) => generateTitle('Прошёл на n из m, легко и просто!', answersCount, maxCount),
+            title: (answersCount: number, maxCount?: number) => generateTitle('Ты прошёл квиз, легко и просто!', answersCount, maxCount),
             message: 'А смогут ли твои друзья так? Поделись с ними квизом, вот и узнаем'
         },
         {
-            title: (answersCount: number, maxCount?: number) => generateTitle('Квиз пройден на n из m', answersCount, maxCount),
+            title: (answersCount: number, maxCount?: number) => generateTitle('Квиз пройден!', answersCount, maxCount),
             message: 'Идеально, гениально, шедеврально'
         },
         {
-            title: (answersCount: number, maxCount?: number) => generateTitle('У тебя получилось пройти на n из m', answersCount, maxCount),
+            title: (answersCount: number, maxCount?: number) => generateTitle('У тебя получилось пройти квиз!', answersCount, maxCount),
             message: 'Интересно, а твои друзья так смогут?'
         },
         {
-            title: (answersCount: number, maxCount?: number) => generateTitle('Браво, n из m', answersCount, maxCount),
+            title: (answersCount: number, maxCount?: number) => generateTitle('Браво!', answersCount, maxCount),
             message: 'Либо тебе повезло, либо ты увлекаешься экологией :)'
         },
     ]
