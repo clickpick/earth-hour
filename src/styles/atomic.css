@@ -18,6 +18,10 @@
     opacity: 0.6;
 }
 
+.Br\(4\) {
+    border-radius: 4px;
+}
+
 .Br\(16\) {
     border-radius: 16px;
 }
