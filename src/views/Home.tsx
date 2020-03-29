@@ -6,7 +6,7 @@ import usePanels from '../hooks/use-panels';
 
 import { View } from '@vkontakte/vkui';
 import Main from '../panels/Main';
-import Vote from '../panels/Vote';
+// import Vote from '../panels/Vote';
 
 export interface HomeProps {
     id: string
@@ -23,7 +23,7 @@ const Home: FC<HomeProps> = ({ id }: HomeProps) => {
             header={false}
             onSwipeBack={goBack}>
             <Main id={HomePanels.MAIN} goForward={goForward} />
-            <Vote id={HomePanels.VOTE} goBack={goBack} />
+            {/*<Vote id={HomePanels.VOTE} goBack={goBack} />*/}
         </View>
     );
 };
