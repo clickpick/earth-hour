@@ -19,9 +19,9 @@ const Finish: FC<FinishProps> = ({ className }: FinishProps) => {
                 width="343"
                 height="290" />
 
-            <Footnote className="color-opacity--secondary margin-purple--bottom">Акция завершилась!</Footnote>
+            <Footnote className="color-opacity--secondary margin-pink--bottom">Акция завершилась!</Footnote>
             <Headline className="Finish__Headline margin-aqua--bottom">350 000</Headline>
-            <Footnote className="color-opacity--secondary">
+            <Footnote className="color-opacity--secondary Ta(c)">
                 людей поучаствовало в этом<br />
                 флэшмобе, спасибо каждому!
             </Footnote>
