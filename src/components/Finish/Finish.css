@@ -1,0 +1,15 @@
+.Finish {
+    position: relative;
+    width: 343px;
+    height: 290px;
+}
+
+.Finish__confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Finish__Headline {
+    font-size: 50px;
+}

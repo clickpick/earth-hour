@@ -11,6 +11,8 @@
 
 @import '../components/Button/Button.css';
 
+@import '../components/Finish/Finish.css';
+
 @import '../components/Question/Question.css';
 @import '../components/Answer/Answer.css';
 
