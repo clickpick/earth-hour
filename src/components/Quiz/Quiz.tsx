@@ -49,8 +49,6 @@ const Quiz: FC<QuizProps> = ({
 }: QuizProps) => {
     const [showGetPresent, setShowGetPresent] = useState<boolean>(!!hasPresent);
     const isRight = useRef<number>(isRightAnswersCount);
-    // eslint-disable-next-line
-    const isFinish = useMemo(() => finish, []);
 
     const questionsCount = useMemo<number>(() => (Array.isArray(questionIds) && questionIds.length) || 0, [questionIds]);
     const shareStory = useCallback(() => showStoryBox(storyLink), [storyLink]);
@@ -123,18 +121,18 @@ const Quiz: FC<QuizProps> = ({
 
     const resultView = useMemo(() => {
         const result = (isRight.current / answersCount) * 100 || 0;
-        const showPrize = isFinish || result >= 75;
+        const showPrize = finish || result >= 60;
         let mood: 'best' | 'good' | 'bad' | 'lock' =
             (showPrize)
                 ? 'best'
-                : (result >= 37 && result < 75)
+                : (result >= 37 && result < 60)
                     ? 'good'
                     : 'bad';
 
         const props = generateResultProps(
             mood,
-            (isFinish) ? 8 : isRight.current,
-            (isFinish) ? 8 : answersCount
+            (finish) ? 8 : isRight.current,
+            (finish) ? 8 : answersCount
         );
 
         return (
@@ -180,7 +178,7 @@ const Quiz: FC<QuizProps> = ({
                 {(showPrize) && <PeopleNature className="margin-pink--top" />}
             </Transition>
         );
-    }, [isFinish, showGetPresent, answersCount, shareStory, reset, exit, getPresent]);
+    }, [finish, showGetPresent, answersCount, shareStory, reset, exit, getPresent]);
 
     const bodyView = useMemo(() => (nextQuestionId !== null)
         ? questionIds.map(questionView)
